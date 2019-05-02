@@ -1,4 +1,4 @@
-package com.guym4c.web.webapps;
+package com.guym4c.web.webapps.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -10,16 +10,13 @@ public class AppUser implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name="sussex_id", unique = true)
+    @Column(unique = true)
     private String sussexId;
     
-    @Column(name = "name")
     private String name;
     
-    @Column(name = "email")
     private String email;
     
-    @Column(name = "password")
     private String password;
 
     public AppUser() {}

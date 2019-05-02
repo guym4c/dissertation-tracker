@@ -1,4 +1,4 @@
-package com.guym4c.web.webapps;
+package com.guym4c.web.webapps.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -10,7 +10,7 @@ public class Supervisor implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(name="sussex_id", unique = true)
+    @Column(unique = true)
     private String sussexId;
     
     @OneToOne(fetch = FetchType.LAZY)
@@ -18,10 +18,8 @@ public class Supervisor implements Serializable {
     @JoinColumn(nullable = false)
     private AppUser appUser;
     
-    @Column(name = "department")
     private String department;
     
-    @Column(name="telephone_number")
     private String telephoneNumber;
 
     public Supervisor() {}

@@ -1,4 +1,4 @@
-package com.guym4c.web.webapps;
+package com.guym4c.web.webapps.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
