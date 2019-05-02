@@ -35,3 +35,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+src/main/resources/META-INF/persistence\.xml
+
+nb-configuration\.xml
