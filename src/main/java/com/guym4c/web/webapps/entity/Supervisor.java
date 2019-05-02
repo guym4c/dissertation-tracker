@@ -4,22 +4,22 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="supervisors")
 public class Supervisor implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(unique = true)
     private String sussexId;
     
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
+    @OneToOne
     @JoinColumn(nullable = false)
+    @MapsId
     private AppUser appUser;
     
+    @Column(nullable = false)
     private String department;
     
+    @Column(nullable = false)
     private String telephoneNumber;
 
     public Supervisor() {}

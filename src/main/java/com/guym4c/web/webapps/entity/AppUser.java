@@ -4,19 +4,20 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Table(name="users")
 public class AppUser implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
-    @Column(unique = true)
     private String sussexId;
     
+    @JoinColumn(nullable = false)
     private String name;
     
+    @JoinColumn(nullable = false)
     private String email;
     
+    @JoinColumn(nullable = false)
     private String password;
 
     public AppUser() {}
