@@ -16,14 +16,47 @@ public class Event implements Serializable {
     @Column(nullable = false)
     private EventType type;
     
+    @JoinColumn
     private AppUser user;
     
-    @
+    @JoinColumn
     private Project project;
     
     @Column(nullable = false)
     private Date timestamp;
-    
-    
-    
+
+    public Event() {}
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
+    public AppUser getUser() {
+        return user;
+    }
+
+    public void setUser(AppUser user) {
+        this.user = user;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+          
 }
