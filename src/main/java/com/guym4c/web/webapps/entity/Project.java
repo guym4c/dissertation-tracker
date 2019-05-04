@@ -4,8 +4,15 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
 
-@NamedQuery(name = "Project.bySupervisor",
-        query = "SELECT p FROM Project p WHERE p.supervisor.sussexId = :supervisorId")
+@NamedQueries({
+    
+    @NamedQuery(name = "Project.bySupervisor", 
+            query = "SELECT p FROM Project p WHERE p.supervisor.sussexId = :supervisorId"),
+    
+    @NamedQuery(name = "Project.all",
+            query = "SELECT p FROM Project p")
+})
+
 
 @Entity
 public class Project implements Serializable {

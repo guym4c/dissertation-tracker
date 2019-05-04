@@ -3,8 +3,15 @@ package com.guym4c.web.webapps.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@NamedQuery(name = "Supervisor.byStudent",
-        query = "SELECT su, su.appUser FROM Student st INNER JOIN st.project p INNER JOIN p.supervisor su WHERE st.sussexId = :studentId")
+@NamedQueries({
+    
+    @NamedQuery(name = "Supervisor.byStudent",
+            query = "SELECT su, su.appUser FROM Student st INNER JOIN st.project p INNER JOIN p.supervisor su WHERE st.sussexId = :studentId"),
+    
+    @NamedQuery(name = "Supervisor.all",
+            query = "SELECT su, su.appUser FROM Supervisor su")
+})
+
 
 @Entity
 public class Supervisor implements Serializable {
