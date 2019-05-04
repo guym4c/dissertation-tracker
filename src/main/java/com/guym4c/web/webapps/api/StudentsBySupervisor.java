@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 public class StudentsBySupervisor extends ApiResolver {
     
     @GET
-    @Path("/{supervisor}")
+    @Path("/student/{supervisor}")
     @Override
     public Response get(@PathParam("supervisor") String supervisorId) {
         return supervisorId.equals("all") 
