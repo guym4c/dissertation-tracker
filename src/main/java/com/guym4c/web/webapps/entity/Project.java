@@ -7,7 +7,7 @@ import javax.persistence.*;
 @NamedQueries({
     
     @NamedQuery(name = "Project.bySupervisor", 
-            query = "SELECT p FROM Project p WHERE p.supervisor.sussexId = :supervisorId"),
+            query = "SELECT p FROM Project p WHERE p.supervisor.appUser.sussexId = :supervisorId"),
     
     @NamedQuery(name = "Project.all",
             query = "SELECT p FROM Project p")
@@ -98,6 +98,4 @@ public class Project implements Serializable {
     public void setSkills(String skills) {
         this.skills = skills;
     }
-    
-    
 }

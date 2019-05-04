@@ -15,13 +15,8 @@ public class StudentsBySupervisor extends ApiResolver {
     @Path("/{supervisor}")
     @Override
     public Response get(@PathParam("supervisor") String supervisorId) {
-        return this.respond("Student.bySupervisor", "supervisorId", supervisorId, Student.class);
-    }
-    
-    @GET
-    @Path("/all")
-    @Override
-    public Response getAll() {
-        return this.respond("Student.all", Student.class);
+        return supervisorId.equals("all") 
+            ? this.respond("Student.all", Student.class)
+            : this.respond("Student.bySupervisor", "supervisorId", supervisorId, Student.class);
     }
 }

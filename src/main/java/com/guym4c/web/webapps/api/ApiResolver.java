@@ -13,8 +13,6 @@ public abstract class ApiResolver {
     
     public abstract Response get(String id);
     
-    public abstract Response getAll();
-    
     protected <T> List<T> retrieve(String query, Class<T> type, String paramKey, String paramValue) {
         return em.createNamedQuery(query, type)
                 .setParameter(paramKey, paramValue)
