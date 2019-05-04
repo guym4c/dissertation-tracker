@@ -17,13 +17,16 @@ public class Event implements Serializable {
     private EventType type;
     
     @JoinColumn
+    @ManyToOne
     private AppUser user;
     
     @JoinColumn
+    @ManyToOne
     private Project project;
     
     @Column(nullable = false)
-    private Date timestamp;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date occurred;
 
     public Event() {}
 
@@ -55,8 +58,8 @@ public class Event implements Serializable {
         return id;
     }
 
-    public Date getTimestamp() {
-        return timestamp;
+    public Date getOccurred() {
+        return occurred;
     }
           
 }
