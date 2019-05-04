@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
 
+@NamedQuery(name = "Project.bySupervisor",
+        query = "SELECT p FROM Project p WHERE p.supervisor.sussexId = :supervisorId")
+
 @Entity
 public class Project implements Serializable {
     
@@ -30,6 +33,10 @@ public class Project implements Serializable {
     private ProjectStatus status;
     
     private String skills;
+    
+    @OneToOne(mappedBy = "project")
+    @JoinColumn
+    private Student student;
     
     public Project() {}
 

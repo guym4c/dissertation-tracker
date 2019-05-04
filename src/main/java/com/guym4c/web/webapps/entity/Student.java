@@ -3,6 +3,9 @@ package com.guym4c.web.webapps.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+@NamedQuery(name = "Student.bySupervisor",
+        query = "SELECT st, st.appUser FROM Student st WHERE st.project.supervisor.sussexId = :supervisorId")
+
 @Entity
 public class Student implements Serializable {
     
@@ -18,6 +21,10 @@ public class Student implements Serializable {
     
     @Column(nullable = false)
     private String course;
+    
+    @JoinColumn
+    @OneToOne
+    private Project project;
 
     public Student() {}
 
@@ -40,5 +47,13 @@ public class Student implements Serializable {
 
     public void setCourse(String course) {
         this.course = course;
-    }    
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }
