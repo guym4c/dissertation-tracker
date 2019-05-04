@@ -6,7 +6,7 @@ import javax.persistence.*;
 @NamedQueries({
     
     @NamedQuery(name = "Supervisor.byStudent",
-            query = "SELECT su, su.appUser FROM Student st INNER JOIN st.project p INNER JOIN p.supervisor su WHERE st.sussexId = :studentId"),
+            query = "SELECT su, su.appUser FROM Student st INNER JOIN st.project p INNER JOIN p.supervisor su WHERE st.appUser.sussexId = :studentId"),
     
     @NamedQuery(name = "Supervisor.all",
             query = "SELECT su, su.appUser FROM Supervisor su")
@@ -19,7 +19,8 @@ public class Supervisor implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    private String sussexId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     
     @OneToOne
     @JoinColumn(nullable = false)
@@ -63,6 +64,8 @@ public class Supervisor implements Serializable {
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
-    
-    
+
+    public long getId() {
+        return id;
+    }
 }

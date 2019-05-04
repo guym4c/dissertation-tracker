@@ -6,12 +6,11 @@ import javax.persistence.*;
 @NamedQueries({
     
     @NamedQuery(name = "Student.bySupervisor",
-            query = "SELECT st, st.appUser FROM Student st WHERE st.project.supervisor.sussexId = :supervisorId"),
+            query = "SELECT st, st.appUser FROM Student st WHERE st.project.supervisor.appUser.sussexId = :supervisorId"),
     
     @NamedQuery(name = "Student.all",
             query = "SELECT st, st.appUser FROM Student st")
 })
-
 
 @Entity
 public class Student implements Serializable {
@@ -19,11 +18,11 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    private String sussexId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     
     @OneToOne
     @JoinColumn(nullable = false)
-    @MapsId
     private AppUser appUser;
     
     @Column(nullable = false)
@@ -62,5 +61,9 @@ public class Student implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public long getId() {
+        return id;
     }
 }

@@ -9,11 +9,11 @@ public class Administrator implements Serializable {
     private static final long serialVersionUID = 1L;
     
     @Id
-    private String sussexId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
     
     @OneToOne
     @JoinColumn(nullable = false)
-    @MapsId
     private AppUser appUser;
 
     public Administrator() {}
@@ -28,5 +28,9 @@ public class Administrator implements Serializable {
 
     public void setAppUser(AppUser appUser) {
         this.appUser = appUser;
+    }
+
+    public long getId() {
+        return id;
     }
 }
