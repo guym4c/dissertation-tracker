@@ -19,6 +19,9 @@ public class AppUser implements Serializable {
     
     @JoinColumn(nullable = false)
     private String password;
+    
+    @Column(nullable = false)
+    private boolean administrator;
 
     public AppUser() {}
 
@@ -59,5 +62,13 @@ public class AppUser implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
     }
 }
