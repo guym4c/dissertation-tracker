@@ -5,10 +5,10 @@ import javax.persistence.*;
 @NamedQueries({
     
     @NamedQuery(name = "Student.bySupervisor",
-            query = "SELECT st, st.appUser FROM Student st WHERE st.project.supervisor.appUser.sussexId = :supervisorId"),
+            query = "SELECT st FROM Student st WHERE st.project.supervisor.appUser.sussexId = :supervisorId"),
     
     @NamedQuery(name = "Student.all",
-            query = "SELECT st, st.appUser FROM Student st")
+            query = "SELECT st FROM Student st")
 })
 
 @Entity
