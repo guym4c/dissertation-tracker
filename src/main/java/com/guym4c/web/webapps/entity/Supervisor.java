@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 public class Supervisor extends AbstractEntity {
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(nullable = false)
     private AppUser appUser;
     

@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Entity
 public class Student extends AbstractEntity {
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(nullable = false)
     private AppUser appUser;
     
