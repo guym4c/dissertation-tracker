@@ -23,7 +23,7 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Supervisor supervisor;
     
@@ -42,7 +42,6 @@ public class Project implements Serializable {
     private String skills;
     
     @OneToOne(mappedBy = "project")
-    @JoinColumn
     private Student student;
     
     public Project() {}
@@ -97,5 +96,9 @@ public class Project implements Serializable {
 
     public void setSkills(String skills) {
         this.skills = skills;
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }

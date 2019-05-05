@@ -1,6 +1,7 @@
 package com.guym4c.web.webapps.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @NamedQueries({
@@ -32,6 +33,9 @@ public class Supervisor implements Serializable {
     
     @Column(nullable = false)
     private String telephoneNumber;
+    
+    @OneToMany(mappedBy = "supervisor")
+    private List<Project> projects;
 
     public Supervisor() {}
 
@@ -67,5 +71,9 @@ public class Supervisor implements Serializable {
 
     public long getId() {
         return id;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
     }
 }
