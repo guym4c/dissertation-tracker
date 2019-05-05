@@ -3,6 +3,13 @@ package com.guym4c.web.webapps.entity;
 import java.util.Date;
 import javax.persistence.*;
 
+@NamedQueries({
+    
+    @NamedQuery(name = "Event.byUser",
+            query = "SELECT e FROM Event e WHERE e.user.sussexId = :userId")
+})
+
+
 @Entity
 public class Event extends AbstractEntity {
     
