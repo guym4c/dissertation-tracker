@@ -1,6 +1,5 @@
 package com.guym4c.web.webapps.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -13,15 +12,8 @@ import javax.persistence.*;
             query = "SELECT p FROM Project p")
 })
 
-
 @Entity
-public class Project implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Project extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -44,10 +36,8 @@ public class Project implements Serializable {
     @OneToOne(mappedBy = "project")
     private Student student;
     
-    public Project() {}
-
-    public long getId() {
-        return id;
+    public Project() {
+        super();
     }
 
     public Supervisor getSupervisor() {

@@ -1,17 +1,10 @@
 package com.guym4c.web.webapps.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-public class Topic implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Topic extends AbstractEntity {
 
     @Column(length = 100, nullable = false)
     private String title;
@@ -22,7 +15,9 @@ public class Topic implements Serializable {
     @ManyToMany(mappedBy = "topics")
     private Set<Project> projects;
 
-    public Topic() {}
+    public Topic() {
+        super();
+    }
 
     public Topic(String title, String description) {
         this.title = title;
@@ -44,10 +39,6 @@ public class Topic implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public long getId() {
-        return id;
-    }  
 
     public Set<Project> getProjects() {
         return projects;

@@ -1,6 +1,5 @@
 package com.guym4c.web.webapps.entity;
 
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
@@ -13,19 +12,11 @@ import javax.persistence.*;
             query = "SELECT su, su.appUser FROM Supervisor su")
 })
 
-
 @Entity
-public class Supervisor implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Supervisor extends AbstractEntity {
     
     @OneToOne
     @JoinColumn(nullable = false)
-    @MapsId
     private AppUser appUser;
     
     @Column(nullable = false)
@@ -37,7 +28,9 @@ public class Supervisor implements Serializable {
     @OneToMany(mappedBy = "supervisor")
     private List<Project> projects;
 
-    public Supervisor() {}
+    public Supervisor() {
+        super();
+    }
 
     public Supervisor(AppUser appUser, String department, String telephoneNumber) {
         this.appUser = appUser;
@@ -67,10 +60,6 @@ public class Supervisor implements Serializable {
 
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public List<Project> getProjects() {

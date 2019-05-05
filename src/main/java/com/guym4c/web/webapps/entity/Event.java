@@ -1,17 +1,10 @@
 package com.guym4c.web.webapps.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-public class Event implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Event extends AbstractEntity {
     
     @Column(nullable = false)
     private EventType type;
@@ -28,7 +21,9 @@ public class Event implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date occurred;
 
-    public Event() {}
+    public Event() {
+        super();
+    }
 
     public EventType getType() {
         return type;
@@ -52,10 +47,6 @@ public class Event implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    public long getId() {
-        return id;
     }
 
     public Date getOccurred() {

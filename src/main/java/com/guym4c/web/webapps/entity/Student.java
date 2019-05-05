@@ -1,6 +1,5 @@
 package com.guym4c.web.webapps.entity;
 
-import java.io.Serializable;
 import javax.persistence.*;
 
 @NamedQueries({
@@ -13,13 +12,7 @@ import javax.persistence.*;
 })
 
 @Entity
-public class Student implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+public class Student extends AbstractEntity {
     
     @OneToOne
     @JoinColumn(nullable = false)
@@ -31,8 +24,10 @@ public class Student implements Serializable {
     @JoinColumn
     @OneToOne
     private Project project;
-
-    public Student() {}
+    
+    public Student() {
+        super();
+    }
 
     public Student(AppUser appUser, String course) {
         this.appUser = appUser;
@@ -61,9 +56,5 @@ public class Student implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    public long getId() {
-        return id;
     }
 }
