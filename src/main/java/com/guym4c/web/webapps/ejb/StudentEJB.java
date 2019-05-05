@@ -9,7 +9,7 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 
 @Stateless
 @TransactionAttribute(NOT_SUPPORTED)
-public class StudentEJB extends AbstractEntityEJB {
+public class StudentEJB extends AbstractUserEJB {
     
     public void create(Student student) {
         this.em.persist(student);
