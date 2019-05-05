@@ -1,5 +1,6 @@
 package com.guym4c.web.webapps.entity;
 
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -35,6 +36,9 @@ public class Project extends AbstractEntity {
     
     @OneToOne(mappedBy = "project")
     private Student student;
+    
+    @OneToMany(mappedBy = "project")
+    private List<Event> events;
     
     public Project() {
         super();
@@ -90,5 +94,9 @@ public class Project extends AbstractEntity {
 
     public Student getStudent() {
         return student;
+    }
+
+    public List<Event> getEvents() {
+        return events;
     }
 }

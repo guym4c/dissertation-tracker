@@ -1,6 +1,7 @@
 package com.guym4c.web.webapps.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
 
 @NamedQueries({
@@ -28,6 +29,9 @@ public class AppUser implements Serializable {
     
     @Column(nullable = false)
     private boolean administrator;
+    
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
 
     public AppUser() {}
 
@@ -76,5 +80,9 @@ public class AppUser implements Serializable {
 
     public void setAdministrator(boolean administrator) {
         this.administrator = administrator;
+    }
+
+    public List<Event> getEvents() {
+        return events;
     }
 }

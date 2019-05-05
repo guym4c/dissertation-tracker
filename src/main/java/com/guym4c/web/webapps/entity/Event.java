@@ -20,6 +20,9 @@ public class Event extends AbstractEntity {
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date occurred;
+    
+    @Column(nullable = false)
+    private boolean notification;
 
     public Event() {
         super();
@@ -52,5 +55,12 @@ public class Event extends AbstractEntity {
     public Date getOccurred() {
         return occurred;
     }
-          
+
+    public boolean isNotification() {
+        return notification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
+    }          
 }
