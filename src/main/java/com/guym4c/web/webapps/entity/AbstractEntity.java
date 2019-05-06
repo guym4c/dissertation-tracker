@@ -7,10 +7,10 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 	
-    private static final long serialVersionUID = 1L;
+    protected static final long serialVersionUID = 1L;
  
     @Id
-    private final String id;
+    protected final String id;
 
     public AbstractEntity() {
         this.id = UUID.randomUUID().toString();
