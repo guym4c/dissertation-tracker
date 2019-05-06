@@ -13,11 +13,7 @@ import javax.persistence.*;
 })
 
 @Entity
-public class Supervisor extends AbstractEntity {
-    
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(nullable = false)
-    private AppUser appUser;
+public class Supervisor extends AbstractUserType {
     
     @Column(nullable = false)
     private String department;
@@ -33,17 +29,9 @@ public class Supervisor extends AbstractEntity {
     }
 
     public Supervisor(AppUser appUser, String department, String telephoneNumber) {
-        this.appUser = appUser;
+        super(appUser);
         this.department = department;
         this.telephoneNumber = telephoneNumber;
-    }
-
-    public AppUser getAppUser() {
-        return appUser;
-    }
-
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
     }
 
     public String getDepartment() {

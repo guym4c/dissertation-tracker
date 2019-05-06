@@ -11,10 +11,6 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @TransactionAttribute(NOT_SUPPORTED)
 public class StudentEJB extends AbstractUserEJB {
     
-    public void create(Student student) {
-        this.em.persist(student);
-    }
-    
     public List<Student> getAll() {
         return this.em.createNamedQuery("Student.all")
                 .getResultList();

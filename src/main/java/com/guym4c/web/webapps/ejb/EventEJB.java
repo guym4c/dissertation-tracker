@@ -30,5 +30,4 @@ public class EventEJB extends AbstractEntityEJB {
                 .setParameter("userId", user.getSussexId())
                 .getResultList();
     }
-    
 }

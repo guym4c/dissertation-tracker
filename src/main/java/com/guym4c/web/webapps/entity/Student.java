@@ -12,11 +12,7 @@ import javax.persistence.*;
 })
 
 @Entity
-public class Student extends AbstractEntity {
-    
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(nullable = false)
-    private AppUser appUser;
+public class Student extends AbstractUserType {
     
     @Column(nullable = false)
     private String course;
@@ -30,16 +26,8 @@ public class Student extends AbstractEntity {
     }
 
     public Student(AppUser appUser, String course) {
-        this.appUser = appUser;
+        super(appUser);
         this.course = course;
-    }
-
-    public AppUser getAppUser() {
-        return appUser;
-    }
-
-    public void setAppUser(AppUser appUser) {
-        this.appUser = appUser;
     }
 
     public String getCourse() {
