@@ -44,6 +44,14 @@ public class Project extends AbstractEntity {
         super();
     }
 
+    public Project(Supervisor supervisor, String title, String description, ProjectStatus status) {
+        this();
+        this.supervisor = supervisor;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+    }
+    
     public Supervisor getSupervisor() {
         return supervisor;
     }

@@ -9,7 +9,6 @@ import javax.persistence.*;
             query = "SELECT e FROM Event e WHERE e.user.sussexId = :userId")
 })
 
-
 @Entity
 public class Event extends AbstractEntity {
     
@@ -33,6 +32,13 @@ public class Event extends AbstractEntity {
 
     public Event() {
         super();
+    }
+
+    public Event(EventType type, Date occurred, boolean notification) {
+        this();
+        this.type = type;
+        this.occurred = occurred;
+        this.notification = notification;
     }
 
     public EventType getType() {
