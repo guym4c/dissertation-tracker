@@ -10,7 +10,10 @@ import javax.persistence.*;
             query = "SELECT p FROM Project p WHERE p.supervisor.appUser.sussexId = :supervisorId"),
     
     @NamedQuery(name = "Project.all",
-            query = "SELECT p FROM Project p")
+            query = "SELECT p FROM Project p"),
+    
+    @NamedQuery(name = "Project.byStatus",
+            query = "SELECT p FROM Project p WHERE p.status = :status")
 })
 
 @Entity
