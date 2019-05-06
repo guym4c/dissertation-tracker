@@ -10,17 +10,11 @@ import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
-import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 import static javax.ejb.TransactionAttributeType.REQUIRED;
 
 @Stateless
 @DeclareRoles({"administrator", "supervisor", "student"})
-public class ProjectEJB extends AbstractEntityEJB {
-    
-    public ProjectEJB() {
-        super();
-    }
-    
+public class ProjectEJB extends AbstractEntityEJB {    
     
     @RolesAllowed({"supervisor", "student"})
     @TransactionAttribute(REQUIRED)
@@ -28,7 +22,7 @@ public class ProjectEJB extends AbstractEntityEJB {
         this.persist(project);
         
         if (project.getCreator().isStudent()) {
-            this.log(new Event(EventType.PROJECT_PROPOSED, true) {{
+            this.log.create(new Event(EventType.PROJECT_PROPOSED, true) {{
                 setProject(project);
                 setTargetUser(project.getSupervisor().getAppUser());
             }});
@@ -46,7 +40,7 @@ public class ProjectEJB extends AbstractEntityEJB {
         student.setProject(project);
         project.setStatus(ProjectStatus.PROPOSED);
         
-        this.log(new Event(EventType.PROJECT_SELECTED, true) {{
+        this.log.create(new Event(EventType.PROJECT_SELECTED, true) {{
             setTargetUser(project.getCreator());
             setProject(project);
         }});
@@ -65,7 +59,7 @@ public class ProjectEJB extends AbstractEntityEJB {
     public void accept(final Project project) {
         project.setStatus(ProjectStatus.ACCEPTED);
         
-        this.log(new Event(EventType.PROJECT_ACCEPTED) {{
+        this.log.create(new Event(EventType.PROJECT_ACCEPTED) {{
             setProject(project);
         }});
         
@@ -80,7 +74,7 @@ public class ProjectEJB extends AbstractEntityEJB {
             project.getStudent().setProject(null);
         }
         
-        this.log(new Event(EventType.PROJECT_REJECTED) {{
+        this.log.create(new Event(EventType.PROJECT_REJECTED) {{
             setProject(project);
             setTargetUser(project.getCreator());
         }});

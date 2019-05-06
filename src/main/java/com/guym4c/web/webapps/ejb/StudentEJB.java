@@ -13,10 +13,6 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @DeclareRoles({"administrator", "supervisor"})
 public class StudentEJB extends AbstractUserEJB {
     
-    public StudentEJB() {
-        super();
-    }
-    
     @RolesAllowed({"administrator"})
     @TransactionAttribute(NOT_SUPPORTED)
     public List<Student> getAll() {

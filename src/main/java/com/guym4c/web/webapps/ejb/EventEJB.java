@@ -15,10 +15,6 @@ import static javax.ejb.TransactionAttributeType.REQUIRED;
 @DeclareRoles({"administrator", "supervisor", "student"})
 public class EventEJB extends AbstractEntityEJB {
     
-    public EventEJB() {
-        super();
-    }
-    
     @PermitAll
     @TransactionAttribute(REQUIRED)
     public void create(Event event) {

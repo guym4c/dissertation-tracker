@@ -13,11 +13,7 @@ import javax.persistence.EntityExistsException;
 @Stateless
 @DeclareRoles({"administrator", "supervisor"})
 public class TopicEJB extends AbstractEntityEJB {
-    
-    public TopicEJB() {
-        super();
-    }
-    
+
     @TransactionAttribute(NOT_SUPPORTED)
     private boolean exists(Topic topic) {
         return this.em.createNamedQuery("Topic.byTitle", Topic.class)
@@ -34,7 +30,7 @@ public class TopicEJB extends AbstractEntityEJB {
         
         this.persist(topic);
         
-        this.log(new Event(EventType.TOPIC_CREATED) {{
+        this.log.create(new Event(EventType.TOPIC_CREATED) {{
             setEventData(topic.getTitle());
         }});
         

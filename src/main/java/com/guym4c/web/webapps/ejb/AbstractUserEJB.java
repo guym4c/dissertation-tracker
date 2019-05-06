@@ -15,10 +15,6 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
     @EJB
     private AppUserGroupEJB appUserGroupBean;
     
-    public AbstractUserEJB() {
-        super();
-    }
-    
     @TransactionAttribute(NOT_SUPPORTED)
     private boolean exists(AppUser user) {
         return !this.em.createNamedQuery("AppUser.all", AppUser.class)

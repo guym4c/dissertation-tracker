@@ -1,6 +1,5 @@
 package com.guym4c.web.webapps.ejb;
 
-import com.guym4c.web.webapps.entity.Event;
 import javax.ejb.EJB;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
@@ -14,9 +13,7 @@ public abstract class AbstractEntityEJB {
     protected EntityManager em;
     
     @EJB
-    private EventEJB eventBean;
-    
-    public AbstractEntityEJB() {}
+    protected EventEJB log;
     
     @TransactionAttribute(NOT_SUPPORTED)
     public <T> T get(String id, Class<T> type) {
@@ -26,11 +23,6 @@ public abstract class AbstractEntityEJB {
     @TransactionAttribute(REQUIRED)
     protected EntityManager persist(Object object) {
         this.em.persist(object);
-        return em;
+        return this.em;
     }
-    
-    @TransactionAttribute(REQUIRED)
-    protected void log(Event event) {
-        this.eventBean.create(event);
-    } 
 }

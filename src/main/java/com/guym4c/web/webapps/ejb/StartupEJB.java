@@ -3,12 +3,14 @@ package com.guym4c.web.webapps.ejb;
 import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.Supervisor;
 import javax.annotation.PostConstruct;
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 
 @Startup
 @Singleton
+@RunAs("administrator")
 public class StartupEJB {
     
     private static final String DEFAULT_ADMIN_USERNAME = "admin1";
@@ -30,10 +32,7 @@ public class StartupEJB {
                 "admin",
                 "admin");
         
-        this.supervisorBean.create(admin);
+        this.supervisorBean.create(admin);        
         this.appUserBean.markAsAdministrator(admin.getAppUser());
-        
-        System.out.println("Supervisor ID is " + admin.getId());
     }
-    
 }
