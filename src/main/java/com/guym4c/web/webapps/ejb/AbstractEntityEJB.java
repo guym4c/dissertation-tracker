@@ -1,5 +1,6 @@
 package com.guym4c.web.webapps.ejb;
 
+import com.guym4c.web.webapps.entity.Event;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,5 +16,9 @@ public abstract class AbstractEntityEJB {
     protected EntityManager persist(Object object) {
         this.em.persist(object);
         return em;
+    }
+    
+    protected void log(Event event) {
+        (new EventEJB()).create(event);
     } 
 }

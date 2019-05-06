@@ -11,4 +11,10 @@ package com.guym4c.web.webapps.entity;
  */
 public enum EventType {
     
+    MARKED_AS_ADMIN,
+    PROJECT_SELECTED,
+    PROJECT_ACCEPTED,
+    PROJECT_REJECTED,
+    TOPIC_CREATED,
+    PROJECT_PROPOSED
 }

@@ -30,8 +30,11 @@ public class AppUser implements Serializable {
     @Column(nullable = false)
     private boolean administrator;
     
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "targetUser")
     private List<Event> events;
+    
+    @OneToMany(mappedBy = "actingUser")
+    private List<Event> eventsCreated;
     
     @OneToOne(mappedBy = "appUser")
     private Supervisor supervisor;
@@ -90,6 +93,10 @@ public class AppUser implements Serializable {
 
     public List<Event> getEvents() {
         return events;
+    }
+
+    public List<Event> getEventsCreated() {
+        return eventsCreated;
     }
     
     public boolean isSupervisor() {

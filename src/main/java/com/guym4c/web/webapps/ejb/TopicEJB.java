@@ -1,5 +1,7 @@
 package com.guym4c.web.webapps.ejb;
 
+import com.guym4c.web.webapps.entity.Event;
+import com.guym4c.web.webapps.entity.EventType;
 import com.guym4c.web.webapps.entity.Topic;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -17,11 +19,17 @@ public class TopicEJB extends AbstractEntityEJB {
                 .isEmpty();
     }
     
-    public void create(Topic topic) throws EntityExistsException {
-        if (!this.exists(topic)) {
-            this.persist(topic).flush();
-        } else {
+    public void create(final Topic topic) throws EntityExistsException {
+        if (this.exists(topic)) {
             throw new EntityExistsException();
         }
+        
+        this.persist(topic);
+        
+        this.log(new Event(EventType.TOPIC_CREATED) {{
+            setEventData(topic.getTitle());
+        }});
+        
+        this.em.flush();
     }
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 @NamedQueries({
     
     @NamedQuery(name = "Event.byUser",
-            query = "SELECT e FROM Event e WHERE e.user.sussexId = :userId")
+            query = "SELECT e FROM Event e WHERE e.actingUser.sussexId = :userId")
 })
 
 @Entity
@@ -17,7 +17,11 @@ public class Event extends AbstractEntity {
     
     @JoinColumn
     @ManyToOne
-    private AppUser user;
+    private AppUser targetUser;
+    
+    @JoinColumn
+    @ManyToOne
+    private AppUser actingUser;
     
     @JoinColumn
     @ManyToOne
@@ -28,17 +32,23 @@ public class Event extends AbstractEntity {
     private Date occurred;
     
     @Column(nullable = false)
-    private boolean notification;
+    private boolean notification = false;
+    
+    private String eventData;
 
     public Event() {
         super();
+        this.occurred = new Date();
     }
 
-    public Event(EventType type, Date occurred, boolean notification) {
+    public Event(EventType type, boolean notification) {
+        this(type);
+        this.notification = notification;
+    }
+    
+    public Event(EventType type) {
         this();
         this.type = type;
-        this.occurred = occurred;
-        this.notification = notification;
     }
 
     public EventType getType() {
@@ -49,12 +59,20 @@ public class Event extends AbstractEntity {
         this.type = type;
     }
 
-    public AppUser getUser() {
-        return user;
+    public AppUser getTargetUser() {
+        return targetUser;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setTargetUser(AppUser targetUser) {
+        this.targetUser = targetUser;
+    }
+
+    public AppUser getActingUser() {
+        return actingUser;
+    }
+
+    public void setActingUser(AppUser actingUser) {
+        this.actingUser = actingUser;
     }
 
     public Project getProject() {
@@ -65,6 +83,14 @@ public class Event extends AbstractEntity {
         this.project = project;
     }
 
+    public String getEventData() {
+        return eventData;
+    }
+
+    public void setEventData(String eventData) {
+        this.eventData = eventData;
+    }
+
     public Date getOccurred() {
         return occurred;
     }
@@ -73,7 +99,7 @@ public class Event extends AbstractEntity {
         return notification;
     }
 
-    public void setNotification(boolean notification) {
-        this.notification = notification;
+    public void setAsNotification() {
+        this.notification = true;
     }          
 }
