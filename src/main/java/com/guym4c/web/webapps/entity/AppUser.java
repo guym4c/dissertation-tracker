@@ -10,12 +10,13 @@ import javax.persistence.*;
             query = "SELECT u FROM AppUser u WHERE u.sussexId = :sussexId")
 })
 
-@Entity
+@Entity(name = "AppUser")
 public class AppUser implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
     @Id
+    @Column(name = "sussexId")
     private String sussexId;
     
     @JoinColumn(nullable = false)
@@ -24,11 +25,8 @@ public class AppUser implements Serializable {
     @JoinColumn(nullable = false)
     private String email;
     
-    @JoinColumn(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
-    
-    @Column(nullable = false)
-    private boolean administrator;
     
     @OneToMany(mappedBy = "targetUser")
     private List<Event> events;
@@ -41,6 +39,9 @@ public class AppUser implements Serializable {
     
     @OneToOne(mappedBy = "appUser")
     private Student student;
+    
+    @OneToMany(mappedBy = "user")
+    private List<AppUserGroup> groups;
 
     public AppUser() {}
 
@@ -83,14 +84,6 @@ public class AppUser implements Serializable {
         this.password = password;
     }
 
-    public boolean isAdministrator() {
-        return administrator;
-    }
-
-    public void setAdministrator(boolean administrator) {
-        this.administrator = administrator;
-    }
-
     public List<Event> getEvents() {
         return events;
     }
@@ -113,5 +106,9 @@ public class AppUser implements Serializable {
 
     public Student getStudent() {
         return student;
+    }
+
+    public List<AppUserGroup> getGroups() {
+        return groups;
     }
 }
