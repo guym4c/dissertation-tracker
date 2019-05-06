@@ -3,6 +3,7 @@ package com.guym4c.web.webapps.ejb;
 import com.guym4c.web.webapps.entity.Project;
 import com.guym4c.web.webapps.entity.ProjectStatus;
 import com.guym4c.web.webapps.entity.Student;
+import com.guym4c.web.webapps.entity.Supervisor;
 import java.util.List;
 
 public class ProjectEJB extends AbstractEntityEJB {
@@ -27,8 +28,21 @@ public class ProjectEJB extends AbstractEntityEJB {
                 .getResultList();
     }
     
-    public void accept(Project project) {
+    public void accept(Project project, Supervisor supervisor) {
         project.setStatus(ProjectStatus.ACCEPTED);
+        this.em.flush();
+    }
+    
+    public void reject(Project project) {
+        project.setStatus(ProjectStatus.AVAILABLE);
+        
+        if (project.getStudent() != null) {
+            project.getStudent().setProject(null);
+        }
+        
+        if (project.getCreator().isStudent()) {
+            this.em.remove(project);
+        }
         this.em.flush();
     }
     
