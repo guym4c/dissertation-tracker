@@ -11,6 +11,10 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @PermitAll
 public class AppUserGroupEJB extends AbstractEntityEJB {
     
+    public AppUserGroupEJB() {
+        super();
+    }
+    
     public void create(AppUserGroup group) {
         this.persist(group).flush();
     }

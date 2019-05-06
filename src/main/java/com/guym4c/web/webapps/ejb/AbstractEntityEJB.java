@@ -1,6 +1,7 @@
 package com.guym4c.web.webapps.ejb;
 
 import com.guym4c.web.webapps.entity.Event;
+import javax.ejb.EJB;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -8,6 +9,11 @@ public abstract class AbstractEntityEJB {
     
     @PersistenceContext
     protected EntityManager em;
+    
+    @EJB
+    private EventEJB eventBean;
+    
+    public AbstractEntityEJB() {}
     
     public <T> T get(long id, Class<T> type) {
         return this.em.find(type, id);
@@ -19,6 +25,6 @@ public abstract class AbstractEntityEJB {
     }
     
     protected void log(Event event) {
-        (new EventEJB()).create(event);
+        this.eventBean.create(event);
     } 
 }

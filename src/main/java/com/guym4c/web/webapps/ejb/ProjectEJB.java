@@ -17,6 +17,10 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @DeclareRoles({"administrator", "supervisor", "student"})
 public class ProjectEJB extends AbstractEntityEJB {
     
+    public ProjectEJB() {
+        super();
+    }
+    
     @RolesAllowed({"supervisor", "student"})
     public void create(final Project project) {        
         this.persist(project);

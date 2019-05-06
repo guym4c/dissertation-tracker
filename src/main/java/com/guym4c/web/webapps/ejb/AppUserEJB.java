@@ -14,6 +14,10 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @DeclareRoles({"administrator"})
 public class AppUserEJB extends AbstractUserEJB {
     
+    public AppUserEJB() {
+        super();
+    }
+    
     public void markAsAdministrator(final AppUser user) {
         this.addToGroup(AppUserGroupType.ADMIN, user);
         

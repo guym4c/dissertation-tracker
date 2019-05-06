@@ -14,6 +14,10 @@ import javax.persistence.EntityExistsException;
 @DeclareRoles({"administrator", "supervisor"})
 public class TopicEJB extends AbstractEntityEJB {
     
+    public TopicEJB() {
+        super();
+    }
+    
     private boolean exists(Topic topic) {
         return this.em.createNamedQuery("Topic.byTitle", Topic.class)
                 .setParameter("title", topic.getTitle())

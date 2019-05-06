@@ -15,6 +15,10 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @DeclareRoles({"administrator", "supervisor", "student"})
 public class EventEJB extends AbstractEntityEJB {
     
+    public EventEJB() {
+        super();
+    }
+    
     @PermitAll
     public void create(Event event) {
         this.persist(event).flush();

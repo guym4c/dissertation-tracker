@@ -15,6 +15,10 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @DeclareRoles({"administrator", "supervisor"})
 public class StudentEJB extends AbstractUserEJB {
     
+    public StudentEJB() {
+        super();
+    }
+    
     @RolesAllowed({"administrator"})
     public List<Student> getAll() {
         return this.em.createNamedQuery("Student.all")
