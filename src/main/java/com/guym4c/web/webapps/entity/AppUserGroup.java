@@ -7,21 +7,21 @@ import javax.persistence.*;
 @Entity(name = "AppUserGroup")
 public class AppUserGroup extends AbstractEntity implements Serializable {
     
-    @Column(name = "group", nullable = false)
+    @Column(name = "groupName", nullable = false)
     private AppUserGroupType groupType;
     
     @ManyToOne
-    @JoinColumn(name = "user")
-    private AppUser user;
+    @JoinColumn(name = "userName")
+    private AppUser appUser;
     
     public AppUserGroup() {
         super();
     }
 
-    public AppUserGroup(AppUserGroupType group, AppUser user) {
+    public AppUserGroup(AppUserGroupType group, AppUser appUser) {
         this();
         this.groupType = group;
-        this.user = user;
+        this.appUser = appUser;
     }
 
     public AppUserGroupType getGroupType() {
@@ -32,11 +32,11 @@ public class AppUserGroup extends AbstractEntity implements Serializable {
         this.groupType = groupType;
     }
 
-    public AppUser getUser() {
-        return user;
+    public AppUser getAppUser() {
+        return appUser;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
     }
 }

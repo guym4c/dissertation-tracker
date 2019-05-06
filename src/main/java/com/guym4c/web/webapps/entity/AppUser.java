@@ -40,7 +40,7 @@ public class AppUser implements Serializable {
     @OneToOne(mappedBy = "appUser")
     private Student student;
     
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "appUser")
     private List<AppUserGroup> groups;
 
     public AppUser() {}

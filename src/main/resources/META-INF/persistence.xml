@@ -8,7 +8,7 @@
     <class>com.guym4c.web.webapps.entity.Student</class>
     <class>com.guym4c.web.webapps.entity.Supervisor</class>
     <class>com.guym4c.web.webapps.entity.Topic</class>
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
