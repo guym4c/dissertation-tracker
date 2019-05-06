@@ -6,7 +6,7 @@ import javax.persistence.EntityExistsException;
 
 public abstract class AbstractUserEJB extends AbstractEntityEJB {
     
-    public boolean exists(AppUser user) {
+    private boolean exists(AppUser user) {
         return this.em.createNamedQuery("AppUser.all", AppUser.class)
                 .setParameter("sussexID", user.getSussexId())
                 .getResultList()

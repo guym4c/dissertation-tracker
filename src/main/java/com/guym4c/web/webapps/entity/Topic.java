@@ -3,6 +3,12 @@ package com.guym4c.web.webapps.entity;
 import java.util.Set;
 import javax.persistence.*;
 
+@NamedQueries({
+    
+    @NamedQuery(name = "Topic.byTitle",
+            query = "SELECT t FROM Topic t WHERE t.title = :title")
+})
+
 @Entity
 public class Topic extends AbstractEntity {
 
