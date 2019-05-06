@@ -9,9 +9,9 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
 
 @Stateless
-@TransactionAttribute(NOT_SUPPORTED)
 @DeclareRoles({"administrator", "supervisor", "student"})
 public class EventEJB extends AbstractEntityEJB {
     
@@ -20,11 +20,13 @@ public class EventEJB extends AbstractEntityEJB {
     }
     
     @PermitAll
+    @TransactionAttribute(REQUIRED)
     public void create(Event event) {
         this.persist(event).flush();
     }
     
     @RolesAllowed({"administrator"})
+    @TransactionAttribute(NOT_SUPPORTED)
     private List<Event> getAll(AbstractUserType user) {
         return this.em.createNamedQuery("Event.byUser", Event.class)
                 .setParameter("userId", user.getAppUser().getSussexId())

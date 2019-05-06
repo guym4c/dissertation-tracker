@@ -8,9 +8,9 @@ import javax.annotation.security.DeclareRoles;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
 
 @Stateless
-@TransactionAttribute(NOT_SUPPORTED)
 @DeclareRoles({"administrator"})
 public class AppUserEJB extends AbstractUserEJB {
     
@@ -18,6 +18,7 @@ public class AppUserEJB extends AbstractUserEJB {
         super();
     }
     
+    @TransactionAttribute(REQUIRED)
     public void markAsAdministrator(final AppUser user) {
         this.addToGroup(AppUserGroupType.ADMIN, user);
         

@@ -5,6 +5,9 @@ import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.AppUserGroup;
 import com.guym4c.web.webapps.entity.AppUserGroupType;
 import javax.ejb.EJB;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
 import javax.persistence.EntityExistsException;
 
 public abstract class AbstractUserEJB extends AbstractEntityEJB {
@@ -16,6 +19,7 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
         super();
     }
     
+    @TransactionAttribute(NOT_SUPPORTED)
     private boolean exists(AppUser user) {
         return !this.em.createNamedQuery("AppUser.all", AppUser.class)
                 .setParameter("sussexId", user.getSussexId())
@@ -23,6 +27,7 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
                 .isEmpty();
         }
         
+    @TransactionAttribute(REQUIRED)
     public void create(AbstractUserType user) throws EntityExistsException {
         if (!this.exists(user.getAppUser())) {
             this.persist(user).flush();
@@ -37,6 +42,7 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
         }
     }
     
+    @TransactionAttribute(REQUIRED)
     protected void addToGroup(AppUserGroupType group, AppUser user) {
         appUserGroupBean.create(new AppUserGroup(group, user));
     }

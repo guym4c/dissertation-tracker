@@ -8,7 +8,6 @@ import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 
 @Stateless
-@TransactionAttribute(NOT_SUPPORTED)
 @RolesAllowed({"administrator"})
 public class SupervisorEJB extends AbstractUserEJB {
     
@@ -16,6 +15,7 @@ public class SupervisorEJB extends AbstractUserEJB {
         super();
     }
     
+    @TransactionAttribute(NOT_SUPPORTED)
     public List<Supervisor> getAll() {
         return this.em.createNamedQuery("Supervisor.all")
                 .getResultList();

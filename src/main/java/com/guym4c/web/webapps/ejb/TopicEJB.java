@@ -7,10 +7,10 @@ import javax.annotation.security.DeclareRoles;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
 import javax.persistence.EntityExistsException;
 
 @Stateless
-@TransactionAttribute(NOT_SUPPORTED)
 @DeclareRoles({"administrator", "supervisor"})
 public class TopicEJB extends AbstractEntityEJB {
     
@@ -18,6 +18,7 @@ public class TopicEJB extends AbstractEntityEJB {
         super();
     }
     
+    @TransactionAttribute(NOT_SUPPORTED)
     private boolean exists(Topic topic) {
         return this.em.createNamedQuery("Topic.byTitle", Topic.class)
                 .setParameter("title", topic.getTitle())
@@ -25,6 +26,7 @@ public class TopicEJB extends AbstractEntityEJB {
                 .isEmpty();
     }
     
+    @TransactionAttribute(REQUIRED)
     public void create(final Topic topic) throws EntityExistsException {
         if (this.exists(topic)) {
             throw new EntityExistsException();

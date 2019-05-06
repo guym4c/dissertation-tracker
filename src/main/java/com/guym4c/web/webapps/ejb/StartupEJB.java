@@ -23,9 +23,7 @@ public class StartupEJB {
     public StartupEJB() {}
     
     @PostConstruct
-    public void initialise() {
-        
-        System.out.println("Setting it up!");
+    public void initialise()  {
         
         Supervisor admin =  new Supervisor(
                 new AppUser(DEFAULT_ADMIN_USERNAME, "admin", "admin@admin", DEFAULT_ADMIN_PASSWORD),

@@ -11,9 +11,9 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
 
 @Stateless
-@TransactionAttribute(NOT_SUPPORTED)
 @DeclareRoles({"administrator", "supervisor", "student"})
 public class ProjectEJB extends AbstractEntityEJB {
     
@@ -21,7 +21,9 @@ public class ProjectEJB extends AbstractEntityEJB {
         super();
     }
     
+    
     @RolesAllowed({"supervisor", "student"})
+    @TransactionAttribute(REQUIRED)
     public void create(final Project project) {        
         this.persist(project);
         
@@ -36,6 +38,7 @@ public class ProjectEJB extends AbstractEntityEJB {
     }
     
     @RolesAllowed({"student"})
+    @TransactionAttribute(REQUIRED)
     public void select(final Student student, final Project project) throws IllegalStateException {
         if (project.getStatus() != ProjectStatus.AVAILABLE) {
             throw new IllegalStateException();

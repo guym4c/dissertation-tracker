@@ -10,8 +10,6 @@ import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 
 @Stateless
-@TransactionAttribute(NOT_SUPPORTED)
-
 @DeclareRoles({"administrator", "supervisor"})
 public class StudentEJB extends AbstractUserEJB {
     
@@ -20,12 +18,14 @@ public class StudentEJB extends AbstractUserEJB {
     }
     
     @RolesAllowed({"administrator"})
+    @TransactionAttribute(NOT_SUPPORTED)
     public List<Student> getAll() {
         return this.em.createNamedQuery("Student.all")
                 .getResultList();
     }
     
     @RolesAllowed({"supervisor"})
+    @TransactionAttribute(NOT_SUPPORTED)
     public List<Student> getAll(Supervisor supervisor) {
         return this.em.createNamedQuery("Student.bySupervisor")
                 .setParameter("supervisorId", supervisor.getAppUser().getSussexId())
