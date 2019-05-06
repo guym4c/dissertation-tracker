@@ -43,6 +43,10 @@ public class Project extends AbstractEntity {
     @OneToMany(mappedBy = "project")
     private List<Event> events;
     
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private AppUser creator;
+    
     public Project() {
         super();
     }
@@ -101,6 +105,14 @@ public class Project extends AbstractEntity {
 
     public void setSkills(String skills) {
         this.skills = skills;
+    }
+
+    public AppUser getCreator() {
+        return creator;
+    }
+
+    public void setCreator(AppUser creator) {
+        this.creator = creator;
     }
 
     public Student getStudent() {
