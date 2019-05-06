@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <security-role>
+        <description>Administrator</description>
+        <role-name>administrator</role-name>
+    </security-role>
+    <security-role>
+        <description>Student</description>
+        <role-name>student</role-name>
+    </security-role>
+    <security-role>
+        <description>Supervisor</description>
+        <role-name>supervisor</role-name>
+    </security-role>
+</web-app>
