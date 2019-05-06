@@ -32,6 +32,12 @@ public class AppUser implements Serializable {
     
     @OneToMany(mappedBy = "user")
     private List<Event> events;
+    
+    @OneToOne(mappedBy = "appUser")
+    private Supervisor supervisor;
+    
+    @OneToOne(mappedBy = "appUser")
+    private Student student;
 
     public AppUser() {}
 
@@ -84,5 +90,21 @@ public class AppUser implements Serializable {
 
     public List<Event> getEvents() {
         return events;
+    }
+    
+    public boolean isSupervisor() {
+        return supervisor != null;
+    }
+    
+    public boolean isStudent() {
+        return student != null;
+    }
+
+    public Supervisor getSupervisor() {
+        return supervisor;
+    }
+
+    public Student getStudent() {
+        return student;
     }
 }
