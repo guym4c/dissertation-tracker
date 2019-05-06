@@ -17,9 +17,9 @@ public class TopicEJB extends AbstractEntityEJB {
                 .isEmpty();
     }
     
-    public void create(Topic topic) {
+    public void create(Topic topic) throws EntityExistsException {
         if (!this.exists(topic)) {
-            this.em.persist(topic);
+            this.persist(topic).flush();
         } else {
             throw new EntityExistsException();
         }

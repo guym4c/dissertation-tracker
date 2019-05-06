@@ -6,5 +6,6 @@ public class AppUserEJB extends AbstractUserEJB {
     
     public void markAsAdministrator(AppUser user) {
         user.setAdministrator(true);
+        this.em.flush();
     }   
 }

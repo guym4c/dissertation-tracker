@@ -15,7 +15,7 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
     
     public void create(AbstractUserType userType) throws EntityExistsException {
         if (!this.exists(userType.getAppUser())) {
-            this.em.persist(userType);
+            this.persist(userType).flush();
         } else {
             throw new EntityExistsException();
         }

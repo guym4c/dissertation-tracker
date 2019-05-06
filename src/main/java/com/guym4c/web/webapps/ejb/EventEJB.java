@@ -12,7 +12,7 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 public class EventEJB extends AbstractEntityEJB {
     
     public void create(Event event) {
-        this.em.persist(event);
+        this.persist(event).flush();
     }
     
     private List<Event> getAll(AbstractUserType user) {

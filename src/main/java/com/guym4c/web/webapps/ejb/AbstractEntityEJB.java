@@ -11,4 +11,9 @@ public abstract class AbstractEntityEJB {
     public <T> T get(long id, Class<T> type) {
         return this.em.find(type, id);
     }
+    
+    protected EntityManager persist(Object object) {
+        this.em.persist(object);
+        return em;
+    } 
 }
