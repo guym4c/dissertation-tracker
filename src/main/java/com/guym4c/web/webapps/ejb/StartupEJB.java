@@ -1,7 +1,7 @@
 package com.guym4c.web.webapps.ejb;
 
 import com.guym4c.web.webapps.entity.AppUser;
-import com.guym4c.web.webapps.entity.AppUserGroupType;
+import com.guym4c.web.webapps.entity.AppUserGroup;
 import com.guym4c.web.webapps.entity.Supervisor;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
@@ -32,7 +32,7 @@ public class StartupEJB {
     @TransactionAttribute(REQUIRED)
     public void initialise() {
         
-        if (appUserBean.getAll(AppUserGroupType.ADMIN).isEmpty()) {
+        if (appUserBean.getAll(AppUserGroup.ADMINISTRATOR).isEmpty()) {
             
             Supervisor admin =  new Supervisor(
                 new AppUser(DEFAULT_ADMIN_USERNAME, "admin", "admin@admin", DEFAULT_ADMIN_PASSWORD),
@@ -44,7 +44,7 @@ public class StartupEJB {
             } catch (EntityExistsException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
                 // deploy setup failed
             }
-            this.appUserBean.markAsAdministrator(admin.getAppUser());
+            this.appUserBean.markAsAdministrator(admin.getAppUser(), false);
         }
     }
 }

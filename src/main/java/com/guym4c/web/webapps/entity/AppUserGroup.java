@@ -1,14 +1,17 @@
 package com.guym4c.web.webapps.entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.*;
 
 @Entity(name = "AppUserGroup")
-public class AppUserGroup extends AbstractEntity implements Serializable {
+public class AppUserGroup extends AbstractEntity {
+    
+    public static String ADMINISTRATOR = "administrator";
+    public static String SUPERVISOR = "supervisor";
+    public static String STUDENT = "student";
     
     @Column(name = "groupName", nullable = false)
-    private AppUserGroupType groupType;
+    private String group;
     
     @ManyToOne
     @JoinColumn(name = "userName")
@@ -18,18 +21,18 @@ public class AppUserGroup extends AbstractEntity implements Serializable {
         super();
     }
 
-    public AppUserGroup(AppUserGroupType group, AppUser appUser) {
+    public AppUserGroup(String group, AppUser appUser) {
         this();
-        this.groupType = group;
+        this.group = group;
         this.appUser = appUser;
     }
 
-    public AppUserGroupType getGroupType() {
-        return groupType;
+    public String getGroup() {
+        return group;
     }
 
-    public void setGroupType(AppUserGroupType groupType) {
-        this.groupType = groupType;
+    public void setGroupType(String group) {
+        this.group = group;
     }
 
     public AppUser getAppUser() {
