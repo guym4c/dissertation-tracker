@@ -1,19 +1,26 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Log In</title>
     </h:head>
-    <body>
-        <h2>Log in</h2>
-        <h:form>
-            Sussex ID: <h:inputText value="#{authBean.userId}"/>
-            Password: <h:inputSecret value="#{authBean.password}"/>
-            <br/>
-            <h:commandButton value="Submit" action="#{authBean.login()}"/>
-            <h:commandButton value="Reset" type="reset"/>
-        </h:form>
-    </body>
+    <h:body>
+        
+        <ui:composition template = "page.xhtml">
+            
+            <ui:define name = "container">
+                <h2>Log in</h2>
+                <h:form>
+                    <b:inputText placeholder="Sussex ID" value="#{authBean.userId}"/>
+                    <b:inputSecret placeholder="Password" value="#{authBean.password}"/>
+                    <b:commandButton value="Submit" action="#{authBean.login()}"/>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+       
+    </h:body>
 </html>
 

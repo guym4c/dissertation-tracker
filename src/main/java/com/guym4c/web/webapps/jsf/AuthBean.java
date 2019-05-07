@@ -37,7 +37,12 @@ public class AuthBean implements Serializable {
         }
         
         this.user = appUserBean.get(this.userId, AppUser.class);
-        context.redirect("/webapps/faces/test.xhtml");
+        
+        if (this.user.isStudent()) {
+            context.redirect("/home/student");
+        } else {
+            context.redirect("/home/supervisor");
+        }
     }
     
     public void logout() {

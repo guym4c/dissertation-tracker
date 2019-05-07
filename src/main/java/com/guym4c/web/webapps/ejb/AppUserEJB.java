@@ -34,7 +34,7 @@ public class AppUserEJB extends AbstractUserEJB {
     
     @TransactionAttribute(NOT_SUPPORTED)
     public List<AppUser> getAll(String group) {
-        return this.em.createNamedQuery("AppUser.byGroup")
+        return this.em.createNamedQuery("AppUser.byGroup", AppUser.class)
                 .setParameter("group", group)
                 .getResultList();
     }

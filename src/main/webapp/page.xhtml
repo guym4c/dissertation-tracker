@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:insert name="header">
+            <title>FliYP</title>
+        </ui:insert>
+    </h:head>
+    <h:body>
+        
+        
+        
+        <b:navBar brand="FliYP" brandHref="#{userUtilBean.userHome()}" fluid="true">
+            <b:navbarLinks>
+                <b:navLink value="Link" href="#"></b:navLink>
+            </b:navbarLinks>
+            <b:navbarLinks pull="right">
+                <ui:fragment rendered="#{userUtilBean.isAdmin()}">
+                    <b:dropMenu value="Admin actions" iconAwesome="wrench">
+                        <b:navLink value="Action" href="#"></b:navLink>
+                        <b:navLink value="Another action" href="#"></b:navLink>
+                    </b:dropMenu>
+                </ui:fragment>
+                <ui:fragment rendered="#{authBean.loggedIn()}">
+                    <b:navLink value="#{userUtilBean.userName()}" href="#{userUtilBean.userHome()}"></b:navLink>
+                </ui:fragment>
+            </b:navbarLinks>
+        </b:navBar>
+        
+        <b:container fluid="true">
+            <ui:insert name="container"></ui:insert>
+        </b:container>
+            
+    </h:body>
+</html>
