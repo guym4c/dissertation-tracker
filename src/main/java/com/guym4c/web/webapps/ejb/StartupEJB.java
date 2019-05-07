@@ -1,6 +1,7 @@
 package com.guym4c.web.webapps.ejb;
 
 import com.guym4c.web.webapps.entity.AppUser;
+import com.guym4c.web.webapps.entity.AppUserGroupType;
 import com.guym4c.web.webapps.entity.Supervisor;
 import javax.annotation.PostConstruct;
 import javax.annotation.security.RunAs;
@@ -22,17 +23,18 @@ public class StartupEJB {
     @EJB
     private AppUserEJB appUserBean;
     
-    public StartupEJB() {}
-    
     @PostConstruct
     public void initialise()  {
         
-        Supervisor admin =  new Supervisor(
+        if (appUserBean.getAll(AppUserGroupType.ADMIN).isEmpty()) {
+            
+            Supervisor admin =  new Supervisor(
                 new AppUser(DEFAULT_ADMIN_USERNAME, "admin", "admin@admin", DEFAULT_ADMIN_PASSWORD),
                 "admin",
                 "admin");
         
-        this.supervisorBean.create(admin);        
-        this.appUserBean.markAsAdministrator(admin.getAppUser());
+            this.supervisorBean.create(admin);        
+            this.appUserBean.markAsAdministrator(admin.getAppUser());
+        }
     }
 }

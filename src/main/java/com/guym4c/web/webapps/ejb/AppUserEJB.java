@@ -4,6 +4,7 @@ import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.AppUserGroupType;
 import com.guym4c.web.webapps.entity.Event;
 import com.guym4c.web.webapps.entity.EventType;
+import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -23,5 +24,12 @@ public class AppUserEJB extends AbstractUserEJB {
         this.log.create(event);
         
         this.em.flush();
-    }   
+    }
+    
+    @TransactionAttribute(NOT_SUPPORTED)
+    public List<AppUser> getAll(AppUserGroupType group) {
+        return this.em.createNamedQuery("AppUser.byGroup")
+                .setParameter("group", group)
+                .getResultList();
+    }
 }
