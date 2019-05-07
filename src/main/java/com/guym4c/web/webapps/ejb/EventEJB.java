@@ -18,6 +18,7 @@ public class EventEJB extends AbstractEntityEJB {
     @PermitAll
     @TransactionAttribute(REQUIRED)
     public void create(Event event) {
+        event.setActingUser(this.session.getUser());
         this.persist(event).flush();
     }
     

@@ -15,6 +15,9 @@ public abstract class AbstractEntityEJB {
     @EJB
     protected EventEJB log;
     
+    @EJB
+    protected SessionEJB session;
+    
     @TransactionAttribute(NOT_SUPPORTED)
     public <T> T get(String id, Class<T> type) {
         return this.em.find(type, id);
