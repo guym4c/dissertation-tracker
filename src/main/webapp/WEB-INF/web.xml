@@ -5,6 +5,9 @@
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/login.xhtml</welcome-file>
+    </welcome-file-list>
     <security-role>
         <description>Administrator</description>
         <role-name>administrator</role-name>
