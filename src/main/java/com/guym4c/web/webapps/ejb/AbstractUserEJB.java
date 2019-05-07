@@ -4,11 +4,15 @@ import com.guym4c.web.webapps.entity.AbstractUserType;
 import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.AppUserGroup;
 import com.guym4c.web.webapps.entity.AppUserGroupType;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 import static javax.ejb.TransactionAttributeType.REQUIRED;
 import javax.persistence.EntityExistsException;
+import javax.xml.bind.DatatypeConverter;
 
 public abstract class AbstractUserEJB extends AbstractEntityEJB {
     
@@ -24,7 +28,15 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
         }
         
     @TransactionAttribute(REQUIRED)
-    public void create(AbstractUserType user) throws EntityExistsException {
+    public void create(AbstractUserType user) throws EntityExistsException, 
+            UnsupportedEncodingException, 
+            NoSuchAlgorithmException {
+        
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	digest.update(user.getAppUser().getPassword().getBytes("UTF-8"));
+        user.getAppUser().setPassword(
+                DatatypeConverter.printBase64Binary(digest.digest()));
+        
         if (!this.exists(user.getAppUser())) {
             this.persist(user).flush();
         } else {

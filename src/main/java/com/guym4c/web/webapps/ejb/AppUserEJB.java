@@ -9,6 +9,7 @@ import javax.annotation.security.DeclareRoles;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.REQUIRED;
+import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 
 @Stateless
 @DeclareRoles({"administrator"})
