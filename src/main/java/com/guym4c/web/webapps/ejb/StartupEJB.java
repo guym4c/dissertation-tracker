@@ -3,11 +3,16 @@ package com.guym4c.web.webapps.ejb;
 import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.AppUserGroupType;
 import com.guym4c.web.webapps.entity.Supervisor;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import javax.annotation.PostConstruct;
 import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.REQUIRED;
+import javax.persistence.EntityExistsException;
 
 @Startup
 @Singleton
@@ -24,7 +29,8 @@ public class StartupEJB {
     private AppUserEJB appUserBean;
     
     @PostConstruct
-    public void initialise()  {
+    @TransactionAttribute(REQUIRED)
+    public void initialise() {
         
         if (appUserBean.getAll(AppUserGroupType.ADMIN).isEmpty()) {
             
@@ -32,8 +38,12 @@ public class StartupEJB {
                 new AppUser(DEFAULT_ADMIN_USERNAME, "admin", "admin@admin", DEFAULT_ADMIN_PASSWORD),
                 "admin",
                 "admin");
-        
-            this.supervisorBean.create(admin);        
+            
+            try {
+                this.supervisorBean.create(admin);
+            } catch (EntityExistsException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
+                // deploy setup failed
+            }
             this.appUserBean.markAsAdministrator(admin.getAppUser());
         }
     }

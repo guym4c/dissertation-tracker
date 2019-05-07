@@ -21,7 +21,7 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
     
     @TransactionAttribute(NOT_SUPPORTED)
     private boolean exists(AppUser user) {
-        return !this.em.createNamedQuery("AppUser.all", AppUser.class)
+        return !this.em.createNamedQuery("AppUser.find", AppUser.class)
                 .setParameter("sussexId", user.getSussexId())
                 .getResultList()
                 .isEmpty();

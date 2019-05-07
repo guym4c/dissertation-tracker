@@ -6,6 +6,9 @@ import javax.persistence.*;
 
 @NamedQueries({
     
+    @NamedQuery(name = "AppUser.find",
+            query = "SELECT u FROM AppUser u WHERE u.sussexId = :sussexId"),
+    
     @NamedQuery(name = "AppUser.byGroup",
             query = "SELECT u FROM AppUserGroup g INNER JOIN g.appUser u WHERE g.groupType = :group")
 })
