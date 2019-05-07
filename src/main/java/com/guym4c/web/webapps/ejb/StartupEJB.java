@@ -35,7 +35,7 @@ public class StartupEJB {
         if (appUserBean.getAll(AppUserGroup.ADMINISTRATOR).isEmpty()) {
             
             Supervisor admin =  new Supervisor(
-                new AppUser(DEFAULT_ADMIN_USERNAME, "admin", "admin@admin", DEFAULT_ADMIN_PASSWORD),
+                new AppUser(DEFAULT_ADMIN_USERNAME, "Admin", "Admin", admin@admin, DEFAULT_ADMIN_PASSWORD),
                 "admin",
                 "admin");
             

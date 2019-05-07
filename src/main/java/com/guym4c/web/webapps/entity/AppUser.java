@@ -26,6 +26,9 @@ public class AppUser implements Serializable {
     private String name;
     
     @JoinColumn(nullable = false)
+    private String surname;
+    
+    @JoinColumn(nullable = false)
     private String email;
     
     @Column(name = "password", nullable = false)
@@ -48,9 +51,10 @@ public class AppUser implements Serializable {
 
     public AppUser() {}
 
-    public AppUser(String sussexId, String name, String email, String password) {
+    public AppUser(String sussexId, String name, String surname, String email, String password) {
         this.sussexId = sussexId;
         this.name = name;
+        this.surname = surname;
         this.email = email;
         this.password = password;
     }
@@ -69,6 +73,14 @@ public class AppUser implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
