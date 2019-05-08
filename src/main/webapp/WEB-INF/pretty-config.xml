@@ -7,5 +7,9 @@
             <pattern value="/login" />
             <view-id value="/faces/login.xhtml" />
     </url-mapping>
+    <url-mapping id="supervisor">
+            <pattern value="/supervisor/#{sussexId}" />
+            <view-id value="/faces/supervisor/view.xhtml" />
+    </url-mapping>
 
 </pretty-config>

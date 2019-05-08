@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Log In</title>
+    </h:head>
+    <h:body>
+        
+        <ui:composition template = "../page.xhtml">
+            
+            <ui:define name = "container">
+                
+                
+                
+                <b:column span="9">
+                    <h2>#{viewSupervisorBean.supervisor.appUser.name} #{viewSupervisorBean.supervisor.appUser.surname}</h2>
+                </b:column>
+                <ui:fragment rendered="#{authBean.user.sussexId == viewSupervisorBean.supervisor.appUser.sussexId}">
+                    <b:panel span="3" title="Notifications">
+                        <b:listLinks>
+                            <ui:repeat value="#{viewSupervisorBean.supervisor.appUser.events}" var="event">
+                                <ui:fragment rendered="#{event.notification}">
+                                    <b:navLink href="/event/#{event.id}">#{event.type} by #{event.actingUser.name} #{event.actingUser.surname}</b:navLink>
+                                </ui:fragment>
+                            </ui:repeat>
+                        </b:listLinks>
+                    </b:panel>
+                </ui:fragment>
+                
+                
+            </ui:define>
+            
+        </ui:composition>
+    </h:body>
+</html>
+
