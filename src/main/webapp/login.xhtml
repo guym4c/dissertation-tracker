@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Log In</title>
     </h:head>
@@ -14,8 +15,19 @@
             <ui:define name = "container">
                 <h2>Log in</h2>
                 <h:form>
-                    <b:inputText placeholder="Sussex ID" value="#{authBean.userId}"/>
-                    <b:inputSecret placeholder="Password" value="#{authBean.password}"/>
+                    <b:inputText placeholder="Sussex ID" 
+                                 required="true" 
+                                 value="#{authBean.userId}"
+                                 validator-message="Invalid username"
+                                 required-message="You must provide a username">
+                        <f:validateRegex pattern="^(?:[a-zA-Z]{2}[a-zA-Z0-9][0-9]{2}|#{userUtilBean.defaultAdminUsername()})$"/>
+                    </b:inputText>
+                    <b:message for="@previous"/>
+                    <b:inputSecret placeholder="Password" 
+                                   required="true" 
+                                   value="#{authBean.password}"
+                                   required-message="You must provide a password"/>
+                    <b:message for="@previous"/>
                     <b:commandButton value="Submit" action="#{authBean.login()}"/>
                 </h:form>
             </ui:define>

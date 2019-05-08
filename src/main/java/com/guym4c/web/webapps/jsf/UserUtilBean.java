@@ -1,17 +1,13 @@
 package com.guym4c.web.webapps.jsf;
 
-import com.guym4c.web.webapps.ejb.AppUserEJB;
+import com.guym4c.web.webapps.ejb.StartupEJB;
 import com.guym4c.web.webapps.entity.AppUserGroup;
-import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 @Named
 @RequestScoped
 public class UserUtilBean extends AbstractBean {
-    
-    @EJB
-    private AppUserEJB appUserBean;
     
     public String userHome() {
         
@@ -21,15 +17,6 @@ public class UserUtilBean extends AbstractBean {
             return "/home/supervisor";
         } else {
             return "/home/student";
-        }
-    }
-    
-    public String userName() {
-        if (!this.session.loggedIn()) {
-            return "";
-        } else {
-            return this.session.getUser().getName() + 
-                    this.session.getUser().getSurname();
         }
     }
     
@@ -44,6 +31,10 @@ public class UserUtilBean extends AbstractBean {
             }
         }
         return isAdmin;
+    }
+    
+    public String defaultAdminUsername() {
+        return StartupEJB.DEFAULT_ADMIN_USERNAME;
     }
     
 }

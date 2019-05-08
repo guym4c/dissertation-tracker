@@ -25,12 +25,12 @@
                     </b:dropMenu>
                 </ui:fragment>
                 <ui:fragment rendered="#{authBean.loggedIn()}">
-                    <b:navLink value="#{userUtilBean.userName()}" href="#{userUtilBean.userHome()}"></b:navLink>
+                    <b:navLink value="#{authBean.user.name} #{authBean.user.surname}" href="#{userUtilBean.userHome()}"></b:navLink>
                 </ui:fragment>
             </b:navbarLinks>
         </b:navBar>
         
-        <b:container fluid="true">
+        <b:container>
             <ui:insert name="container"></ui:insert>
         </b:container>
             
