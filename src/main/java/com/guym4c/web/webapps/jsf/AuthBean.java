@@ -41,18 +41,20 @@ public class AuthBean implements Serializable {
         if (this.user.isStudent()) {
             context.redirect("/home/student");
         } else {
-            context.redirect("/home/supervisor");
+            context.redirect("/supervisor/" + this.user.getSussexId());
         }
     }
     
-    public void logout() {
-        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+    public void logout() throws IOException {
+        ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+        HttpServletRequest request = (HttpServletRequest) context.getRequest();
         try {
             request.logout();
             this.user = null;
         } catch (ServletException e) {
             //TODO handle failed logout
         }
+        context.redirect("/login");
     }
     
     public boolean loggedIn() {

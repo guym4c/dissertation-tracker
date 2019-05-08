@@ -4,6 +4,7 @@ import com.guym4c.web.webapps.entity.Student;
 import com.guym4c.web.webapps.entity.Supervisor;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
