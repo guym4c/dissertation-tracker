@@ -1,5 +1,7 @@
 package com.guym4c.web.webapps.jsf;
 
+import com.guym4c.web.webapps.entity.AppUser;
+
 public abstract class NewUserBean extends AbstractBean {
     
     protected String sussexId;
@@ -18,6 +20,10 @@ public abstract class NewUserBean extends AbstractBean {
 
     public void setSussexId(String sussexId) {
         this.sussexId = sussexId;
+    }
+    
+    protected AppUser constructUser() {
+        return new AppUser(this.sussexId, this.name, this.surname, this.email, this.password);
     }
 
     public String getName() {

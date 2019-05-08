@@ -11,6 +11,7 @@
             <pattern value="/logout" />
             <view-id value="/faces/logout.xhtml" />
     </url-mapping>
+    
     <url-mapping id="supervisor">
             <pattern value="/supervisor/#{sussexId}" />
             <view-id value="/faces/supervisor/view.xhtml" />
@@ -22,6 +23,11 @@
     <url-mapping id="new-supervisor">
             <pattern value="/supervisors/new" />
             <view-id value="/faces/supervisor/new.xhtml" />
+    </url-mapping>
+    
+    <url-mapping id="new-student">
+            <pattern value="/students/new" />
+            <view-id value="/faces/student/new.xhtml" />
     </url-mapping>
 
 </pretty-config>
