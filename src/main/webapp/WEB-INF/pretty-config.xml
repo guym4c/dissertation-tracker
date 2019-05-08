@@ -15,5 +15,9 @@
             <pattern value="/supervisor/#{sussexId}" />
             <view-id value="/faces/supervisor/view.xhtml" />
     </url-mapping>
+    <url-mapping id="new-supervisor">
+            <pattern value="/supervisors/new" />
+            <view-id value="/faces/supervisor/new.xhtml" />
+    </url-mapping>
 
 </pretty-config>

@@ -15,7 +15,7 @@ public class UserUtilBean extends AbstractBean {
         if (!this.session.loggedIn()) {
             return "/login";
         } else if (this.session.getUser().isSupervisor()) {
-            return "/home/supervisor";
+            return "/supervisors/" + this.session.getUser().getSussexId();
         } else {
             return "/home/student";
         }
