@@ -20,12 +20,13 @@
             <b:navbarLinks pull="right">
                 <ui:fragment rendered="#{userUtilBean.isAdmin()}">
                     <b:dropMenu value="Admin actions" iconAwesome="wrench">
-                        <b:navLink value="Action" href="#"></b:navLink>
-                        <b:navLink value="Another action" href="#"></b:navLink>
+                        <b:navLink value="Action" href="#"/>
+                        <b:navLink value="Another action" href="#"/>
                     </b:dropMenu>
                 </ui:fragment>
                 <ui:fragment rendered="#{authBean.loggedIn()}">
-                    <b:navLink value="#{authBean.user.name} #{authBean.user.surname}" href="#{userUtilBean.userHome()}"></b:navLink>
+                    <b:navLink value="#{authBean.user.name} #{authBean.user.surname}" href="#{userUtilBean.userHome()}"/>
+                    <b:navLink value="Log out" href="/logout"/>
                 </ui:fragment>
             </b:navbarLinks>
         </b:navBar>
