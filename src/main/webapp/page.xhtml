@@ -20,8 +20,9 @@
             <b:navbarLinks pull="right">
                 <ui:fragment rendered="#{userUtilBean.isAdmin()}">
                     <b:dropMenu value="Admin actions" iconAwesome="wrench">
-                        <b:navLink value="New supervisor" href="/supervisors/new"/>
-                        <b:navLink value="Another action" href="#"/>
+                        <b:navLink header="Supervisors"></b:navLink>
+                        <b:navLink value="New" href="/supervisors/new" iconAwesome="plus"/>
+                        <b:navLink value="View all" href="/supervisors" iconAwesome="users"/>
                     </b:dropMenu>
                 </ui:fragment>
                 <ui:fragment rendered="#{authBean.loggedIn()}">

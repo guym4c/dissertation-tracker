@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Log In</title>
+    </h:head>
+    <h:body>
+        
+        <ui:composition template = "../page.xhtml">
+            
+            <ui:define name = "container">
+                
+                <h2>Supervisors</h2>
+                    
+                <ui:repeat value="#{viewAllSupervisorsBean.supervisors}" var="supervisor" varStatus="loop">
+                    <b:panel id="panel#{loop.index}" 
+                             collapsed="true"
+                             title="#{supervisor.appUser.name} #{supervisor.appUser.surname}">
+
+                        <b:row>
+                            <b:column span="3">
+                                <strong>Sussex ID</strong>
+                            </b:column>
+                            <b:column span="3">
+                                <b:navLink href="/supervisor/#{supervisor.appUser.sussexId}">
+                                    <h:outputText value="#{supervisor.appUser.sussexId}"/>
+                                </b:navLink>
+                            </b:column>
+
+                            <b:column span="3">
+                                <strong>Email</strong>
+                            </b:column>
+                            <b:column span="3">
+                                <b:navLink href="mailto:#{supervisor.appUser.email}">
+                                    <h:outputText value="#{supervisor.appUser.email}"/>
+                                </b:navLink>
+                            </b:column>
+                        </b:row>
+
+                        <b:row>
+                            <b:column span="3">
+                                <strong>Department</strong>
+                            </b:column>
+                            <b:column span="3">
+                                <h:outputText value="#{supervisor.department}"/>
+                            </b:column>
+
+                            <b:column span="3">
+                                <strong>Telephone number</strong>
+                            </b:column>
+                            <b:column span="3">
+                                <b:navLink href="tel:#{supervisor.telephoneNumber}">
+                                    <h:outputText value="#{supervisor.telephoneNumber}"/>
+                                </b:navLink>
+                            </b:column>
+                        </b:row>
+
+                        <h3>Projects</h3>
+                        
+                        <ui:repeat value="#{supervisor.projects}" var="project">
+                            <b:panel>
+                                <h4>#{project.title}</h4>
+                                <h:outputText value="#{project.description}"/>
+                                
+                                <b:row>
+                                    <b:column span="3">
+                                        <strong>Student</strong>
+                                    </b:column>
+                                    <b:column span="3">
+                                        <ui:fragment rendered="#{project.status == 'ACCEPTED' or project.status == 'PROPOSED'}">
+                                            <b:navLink href="mailto:#{project.student.appUser.email}">
+                                                <h:outputText value="#{project.student.appUser.name} #{project.student.appUser.surname}"/>
+                                            </b:navLink>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{project.status == 'AVAILABLE'}">
+                                            <h:outputText value="no student assigned"/>
+                                        </ui:fragment>
+                                    </b:column>
+
+                                    <b:column span="3">
+                                        <strong>Status</strong>
+                                    </b:column>
+                                    <b:column span="3">
+                                        <h:outputText value="#{project.status}"/>
+                                    </b:column>
+                                </b:row>
+                                
+                                <b:row>
+                                    <b:column span="3">
+                                        <strong>Topics</strong>
+                                    </b:column>
+                                    <b:column span="3">
+                                        <ui:fragment rendered="#{!project.topics.isEmpty()}">
+                                            <ui:repeat value="#{project.topics}" var="topic" varStatus="loop">
+                                                <b:navLink href="/topic/#{topic.id}">
+                                                    <h:outputText value="#{topic.title}"/>
+                                                </b:navLink>
+
+                                                <ui:fragment rendered="#{!loop.last}">
+                                                    <h:outputText value=","/>
+                                                </ui:fragment>
+                                            </ui:repeat>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{project.topics.isEmpty()}">
+                                            <h:outputText value="no topics assigned"/>
+                                        </ui:fragment>
+                                    </b:column>
+
+                                    <b:column span="3">
+                                        <strong>Skills</strong>
+                                    </b:column>
+                                    <b:column span="3">
+                                        <h:outputText value="#{project.skills}"/>
+                                    </b:column>
+                                </b:row>
+                                
+                                
+                                
+                            </b:panel>
+                        </ui:repeat>
+
+                    </b:panel>
+                </ui:repeat>                
+                
+            </ui:define>
+            
+            
+        </ui:composition>
+    </h:body>
+</html>
