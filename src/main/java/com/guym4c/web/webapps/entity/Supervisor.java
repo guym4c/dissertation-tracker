@@ -9,7 +9,10 @@ import javax.persistence.*;
             query = "SELECT su FROM Student st INNER JOIN st.project p INNER JOIN p.supervisor su WHERE st.appUser.sussexId = :studentId"),
     
     @NamedQuery(name = "Supervisor.all",
-            query = "SELECT su FROM Supervisor su")
+            query = "SELECT su FROM Supervisor su"),
+    
+    @NamedQuery(name = "Supervisor.get",
+            query = "SELECT su FROM Supervisor su WHERE su.appUser.sussexId = :sussexId")
 })
 
 @Entity

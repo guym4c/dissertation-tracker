@@ -19,7 +19,7 @@ import javax.persistence.EntityExistsException;
 @RunAs("administrator")
 public class StartupEJB {
     
-    private static final String DEFAULT_ADMIN_USERNAME = "admin1";
+    public static final String DEFAULT_ADMIN_USERNAME = "admin1";
     private static final String DEFAULT_ADMIN_PASSWORD = "admin1";
     
     @EJB

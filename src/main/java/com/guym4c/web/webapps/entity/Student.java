@@ -8,7 +8,10 @@ import javax.persistence.*;
             query = "SELECT st FROM Student st WHERE st.project.supervisor.appUser.sussexId = :supervisorId"),
     
     @NamedQuery(name = "Student.all",
-            query = "SELECT st FROM Student st")
+            query = "SELECT st FROM Student st"),
+    
+    @NamedQuery(name = "Student.get",
+            query = "SELECT st FROM Student st WHERE st.appUser.sussexId = :sussexId")
 })
 
 @Entity
