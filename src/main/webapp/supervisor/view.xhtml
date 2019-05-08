@@ -38,7 +38,9 @@
                     </h:form>
                 </b:column>
                 <ui:fragment rendered="#{authBean.user.sussexId == viewSupervisorBean.supervisor.appUser.sussexId}">
-                    <b:panel span="3" title="Notifications">
+                    <b:panel span="3" 
+                             title="Notifications" 
+                             collapsible="false">
                         <ui:repeat value="#{viewSupervisorBean.supervisor.appUser.events}" var="event">
                             <ui:fragment rendered="#{event.notification}">
                                 <b:panel>

@@ -28,7 +28,9 @@
                                    value="#{authBean.password}"
                                    required-message="You must provide a password"/>
                     <b:message for="@previous"/>
-                    <b:commandButton value="Submit" action="#{authBean.login()}"/>
+                    <b:commandButton value="Log in" 
+                                     look="primary"
+                                     action="#{authBean.login()}"/>
                 </h:form>
             </ui:define>
         </ui:composition>
