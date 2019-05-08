@@ -1,6 +1,7 @@
 package com.guym4c.web.webapps.jsf;
 
 import com.guym4c.web.webapps.ejb.StartupEJB;
+import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.AppUserGroup;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -24,8 +25,13 @@ public class UserUtilBean extends AbstractBean {
         if (!this.session.loggedIn()) {
             return false;
         }
+        return this.isAdmin(this.session.getUser());
+        
+    }
+    
+    public boolean isAdmin(AppUser user) {
         boolean isAdmin = false;
-        for (AppUserGroup group : this.session.getUser().getGroups()) {
+        for (AppUserGroup group : user.getGroups()) {
             if (group.getGroup().equals(AppUserGroup.ADMINISTRATOR)) {
                 isAdmin = true; 
             }

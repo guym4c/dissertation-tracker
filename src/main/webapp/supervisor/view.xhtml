@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:b="http://bootsfaces.net/ui"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Log In</title>
     </h:head>
@@ -12,21 +13,58 @@
         <ui:composition template = "../page.xhtml">
             
             <ui:define name = "container">
-                
-                
-                
+
                 <b:column span="9">
-                    <h2>#{viewSupervisorBean.supervisor.appUser.name} #{viewSupervisorBean.supervisor.appUser.surname}</h2>
+                    <h2>
+                        <span>#{viewSupervisorBean.supervisor.appUser.name} #{viewSupervisorBean.supervisor.appUser.surname}</span>
+                        <ui:fragment rendered="#{!userUtilBean.isAdmin() and userUtilBean.isAdmin(authBean.user)}">
+                            <h:form style="display: inline;">
+                                <b:commandButton action="#{viewSupervisorBean.markAsAdministrator()}" 
+                                                 value="Mark as administrator"
+                                                 look="link"/>
+                            </h:form>
+                        </ui:fragment>
+                    </h2>
+                    <h3>Projects</h3>
+                    <h:form>
+                        <b:dataTable value="#{viewSupervisorBean.supervisor.projects}" var="project">
+                            <b:dataTableColumn value="#{project.title}"
+                                               label="Title"/>
+                            <b:dataTableColumn value="#{project.student.appUser.name} #{project.student.appUser.surname}"
+                                               label="Student"/>
+                            <b:dataTableColumn value="#{project.creator.name} #{project.creator.surname}"
+                                               label="Proposed by"/>
+                        </b:dataTable>
+                    </h:form>
                 </b:column>
                 <ui:fragment rendered="#{authBean.user.sussexId == viewSupervisorBean.supervisor.appUser.sussexId}">
                     <b:panel span="3" title="Notifications">
-                        <b:listLinks>
-                            <ui:repeat value="#{viewSupervisorBean.supervisor.appUser.events}" var="event">
-                                <ui:fragment rendered="#{event.notification}">
-                                    <b:navLink href="/event/#{event.id}">#{event.type} by #{event.actingUser.name} #{event.actingUser.surname}</b:navLink>
-                                </ui:fragment>
-                            </ui:repeat>
-                        </b:listLinks>
+                        <ui:repeat value="#{viewSupervisorBean.supervisor.appUser.events}" var="event">
+                            <ui:fragment rendered="#{event.notification}">
+                                <b:panel>
+                                    <h:outputText value="#{event.type} by #{event.actingUser.name} #{event.actingUser.surname}"/>
+                                    <ui:fragment rendered="#{event.type == 'PROJECT_PROPOSED'}">
+                                        <h:form>
+                                            <b:buttonGroup>
+                                                <ui:fragment rendered="#{event.project.status == 'PROPOSED'}">
+                                                    <b:commandButton value="Accept" icon-awesome="check"/>
+                                                    <b:commandButton value="Reject" icon-awesome="times"/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{event.project.status == 'ACCEPTED'}">
+                                                    <b:commandButton value="Accepted" icon-awesome="check" disabled="true"/>
+                                                </ui:fragment>
+                                                <ui:fragment rendered="#{event.project.status == 'AVAILABLE'}">
+                                                    <b:commandButton value="Rejected" icon-awesome="times" disabled="true"/>
+                                                </ui:fragment>
+                                            </b:buttonGroup>
+                                        </h:form>
+                                    </ui:fragment>
+                                </b:panel>
+                            </ui:fragment>
+                        </ui:repeat>
+                        <f:facet name="footer">
+                            <h:outputText value="No more to show"/>
+                        </f:facet>
                     </b:panel>
                 </ui:fragment>
                 
