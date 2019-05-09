@@ -33,4 +33,9 @@
             <pattern value="/students" />
             <view-id value="/faces/student/viewAll.xhtml" />
     </url-mapping>
+    
+    <url-mapping id="new-topic">
+            <pattern value="/projects/topics/new" />
+            <view-id value="/faces/project/newTopic.xhtml" />
+    </url-mapping>
 </pretty-config>

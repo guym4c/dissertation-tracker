@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Entity
 public class Topic extends AbstractEntity {
 
+    public static int TITLE_LENGTH = 100;
     @Column(length = 100, nullable = false)
     private String title;
     

@@ -36,4 +36,8 @@ public class TopicEJB extends AbstractEntityEJB {
         
         this.em.flush();
     }
+    
+    public boolean exists (String title) {
+        return this.exists(new Topic(title, ""));
+    }
 }

@@ -10,6 +10,7 @@ import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
+import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 import static javax.ejb.TransactionAttributeType.REQUIRED;
 
 @Stateless
@@ -49,6 +50,7 @@ public class ProjectEJB extends AbstractEntityEJB {
     }
     
     @RolesAllowed({"student"})
+    @TransactionAttribute(NOT_SUPPORTED)
     public List<Project> getAllUnassigned() {
         return this.em.createNamedQuery("Project.byStatus", Project.class)
                 .setParameter("status", ProjectStatus.AVAILABLE)
@@ -56,6 +58,7 @@ public class ProjectEJB extends AbstractEntityEJB {
     }
     
     @RolesAllowed({"supervisor"})
+    @TransactionAttribute(REQUIRED)
     public void accept(final Project project) {
         project.setStatus(ProjectStatus.ACCEPTED);
         
@@ -66,7 +69,8 @@ public class ProjectEJB extends AbstractEntityEJB {
         this.em.flush();
     }
     
-    @RolesAllowed({"supervisor"})
+    @RolesAllowed({"supervisor", "administrator"})
+    @TransactionAttribute(REQUIRED)
     public void reject(final Project project) {
         project.setStatus(ProjectStatus.AVAILABLE);
         
