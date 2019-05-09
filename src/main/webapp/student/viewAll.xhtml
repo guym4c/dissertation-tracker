@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Log In</title>
+    </h:head>
+    <h:body>
+        
+        <ui:composition template = "../page.xhtml">
+            
+            <ui:define name = "container">
+
+                    <h2>Students</h2>
+                    <h:form>
+                        <b:dataTable value="#{viewStudentsBean.students}" var="student">
+                            <b:dataTableColumn label="Student">
+                                <b:navLink href="mailto:#{student.appUser.email}" 
+                                           value="#{student.appUser.name} #{student.appUser.surname}"/>
+                                <ui:fragment rendered="#{userUtilBean.isAdmin() and !userUtilBean.isAdmin(student.appUser)}">
+                                    <h:outputText value=" "/>
+                                    <b:commandLink action="#{viewStudentsBean.markAsAdministrator(student)}"
+                                                   value="(Mark as administrator)"/>
+                                </ui:fragment>
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="Course"
+                                               value="#{student.course}"/>
+                            <b:dataTableColumn label="Project">
+                                <ui:fragment rendered="#{student.project != null}">
+                                    <h:outputText value="#{student.project.title}"/>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{student.project == null}">
+                                    <h:outputText value="(no project selected)"/>
+                                </ui:fragment>
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="Status">
+                                <ui:fragment rendered="#{student.project != null}">
+                                    <h:outputText value="#{student.project.status}"/>
+                                </ui:fragment>
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                    </h:form>
+                    
+            </ui:define>
+            
+        </ui:composition>
+        
+    </h:body>
+</html>

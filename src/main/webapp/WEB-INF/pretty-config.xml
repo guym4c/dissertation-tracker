@@ -29,5 +29,8 @@
             <pattern value="/students/new" />
             <view-id value="/faces/student/new.xhtml" />
     </url-mapping>
-
+    <url-mapping id="supervisors">
+            <pattern value="/students" />
+            <view-id value="/faces/student/viewAll.xhtml" />
+    </url-mapping>
 </pretty-config>

@@ -1,7 +1,9 @@
 package com.guym4c.web.webapps.jsf;
 
 import com.guym4c.web.webapps.ejb.AppUserEJB;
+import com.guym4c.web.webapps.ejb.ProjectEJB;
 import com.guym4c.web.webapps.ejb.SupervisorEJB;
+import com.guym4c.web.webapps.entity.Project;
 import com.guym4c.web.webapps.entity.Supervisor;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -20,6 +22,9 @@ public class ViewSupervisorBean extends AbstractBean {
     @EJB
     private AppUserEJB appUserBean;
     
+    @EJB
+    private ProjectEJB projectBean;
+    
     @PostConstruct
     public void initialise() {
         this.supervisor = supervisorBean.get(this.request.getParameter("sussexId"));
@@ -35,5 +40,9 @@ public class ViewSupervisorBean extends AbstractBean {
     
     public void markAsAdministrator() {
         appUserBean.markAsAdministrator(supervisor.getAppUser());
+    }
+    
+    public void unselect(Project project) {
+        projectBean.reject(project);
     }
 }
