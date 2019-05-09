@@ -1,7 +1,10 @@
 package com.guym4c.web.webapps.jsf;
 
 import com.guym4c.web.webapps.ejb.AppUserEJB;
+import com.guym4c.web.webapps.ejb.EventEJB;
 import com.guym4c.web.webapps.entity.AppUser;
+import com.guym4c.web.webapps.entity.Event;
+import com.guym4c.web.webapps.entity.EventType;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -27,6 +30,9 @@ public class AuthBean implements Serializable {
     @EJB
     private AppUserEJB appUserBean;
     
+    @EJB
+    private EventEJB eventBean;
+    
     public void login() throws IOException {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
@@ -37,6 +43,8 @@ public class AuthBean implements Serializable {
         }
         
         this.user = appUserBean.get(this.userId, AppUser.class);
+        
+        eventBean.create(new Event(EventType.LOGIN));
         
         if (this.user.isStudent()) {
             context.redirect("/home/student");
@@ -54,6 +62,8 @@ public class AuthBean implements Serializable {
         } catch (ServletException e) {
             //TODO handle failed logout
         }
+        
+        
         context.redirect("/login");
     }
     
