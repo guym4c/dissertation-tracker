@@ -53,7 +53,7 @@
                             <ui:fragment rendered="#{event.notification}">
                                 <b:panel>
                                     <h:outputText value="#{event.type} by #{event.actingUser.name} #{event.actingUser.surname}"/>
-                                    <ui:fragment rendered="#{event.type == 'PROJECT_PROPOSED'}">
+                                    <ui:fragment rendered="#{event.type == 'PROJECT_PROPOSED' or event.type == 'PROJECT_SELECTED'}">
                                         <h:form>
                                             <b:buttonGroup>
                                                 <ui:fragment rendered="#{event.project.status == 'PROPOSED'}">

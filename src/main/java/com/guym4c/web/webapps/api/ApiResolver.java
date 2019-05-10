@@ -23,16 +23,6 @@ public abstract class ApiResolver {
         return em.createNamedQuery(query, returns).getResultList();
     }
     
-    protected <T> Response respond(String query, String paramKey, String paramValue, Class<T> type) {        
-        return this.createResponse(
-                this.retrieve(query, type, paramKey, paramValue));
-    }
-    
-    protected <T> Response respond(String query, Class<T> type) {
-        return this.createResponse(
-                this.retrieve(query, type));
-    }
-    
     private Response createResponse(List results) {
         return results.isEmpty() 
                 ? Response.status(Response.Status.NOT_FOUND).build()

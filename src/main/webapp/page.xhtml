@@ -13,7 +13,7 @@
         
         <b:navBar brand="FliYP" brandHref="#{userUtilBean.userHome()}" fluid="true">
             <b:navbarLinks>
-                <ui:fragment rendered="#{authBean.loggedIn() and viewProjectsBean.projectNotSelected()}">
+                <ui:fragment rendered="#{authBean.loggedIn() and userUtilBean.projectNotSelected()}">
                     <b:navLink value="Propose project"
                            href="/projects/new"
                            iconAwesome="plus"/>
@@ -29,7 +29,7 @@
             <b:navbarLinks pull="right">
                 <ui:fragment rendered="#{userUtilBean.isAdmin()}">
                     <b:dropMenu value="Admin actions" iconAwesome="wrench">
-                        <b:navLink value="Log" iconAwesome="list-ul"/>
+                        <b:navLink value="Log" iconAwesome="list-ul" href="/events"/>
                         <b:navLink/>
                         <b:navLink header="Supervisors"/>
                         <b:navLink value="New" href="/supervisors/new" iconAwesome="plus"/>

@@ -3,6 +3,7 @@ package com.guym4c.web.webapps.ejb;
 import com.guym4c.web.webapps.entity.AbstractUserType;
 import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.AppUserGroup;
+import com.guym4c.web.webapps.entity.Student;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -42,7 +43,7 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
             throw new EntityExistsException();
         }
         
-        if (user.getAppUser().isStudent()) {
+        if (user instanceof Student) {
             this.addToGroup(AppUserGroup.STUDENT, user.getAppUser());
         } else {
             this.addToGroup(AppUserGroup.SUPERVISOR, user.getAppUser());

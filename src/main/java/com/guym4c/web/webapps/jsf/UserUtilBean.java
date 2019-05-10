@@ -52,6 +52,9 @@ public class UserUtilBean extends AbstractBean {
         if (!this.session.loggedIn()) {
             return false;
         }
+        if (this.session.getUser().isSupervisor()) {
+            return true;
+        }
         return this.studentBean.get(
                 this.session.getUser().getSussexId())
                 .getProject() != null;
@@ -59,6 +62,9 @@ public class UserUtilBean extends AbstractBean {
     
     public boolean projectNotSelected() {
         if (!this.session.loggedIn()) {
+            return true;
+        }
+        if (this.session.getUser().isSupervisor()) {
             return true;
         }
         return this.studentBean.get(

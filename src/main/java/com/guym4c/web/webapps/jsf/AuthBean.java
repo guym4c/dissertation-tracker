@@ -47,7 +47,7 @@ public class AuthBean implements Serializable {
         eventBean.create(new Event(EventType.LOGIN));
         
         if (this.user.isStudent()) {
-            context.redirect("/home/student");
+            context.redirect("/projects");
         } else {
             context.redirect("/supervisor/" + this.user.getSussexId());
         }
@@ -62,8 +62,7 @@ public class AuthBean implements Serializable {
         } catch (ServletException e) {
             //TODO handle failed logout
         }
-        request.getSession().invalidate();
-        
+
         context.redirect("/login");
     }
     
