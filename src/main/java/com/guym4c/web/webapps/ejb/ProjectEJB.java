@@ -42,17 +42,21 @@ public class ProjectEJB extends AbstractEntityEJB {
     
     @RolesAllowed({"student"})
     @TransactionAttribute(REQUIRED)
-    public void select(final Student student, final Project project) throws IllegalStateException {
+    public void select(Student inputStudent, Project inputProject) throws IllegalStateException {
+        
+        Project project = this.em.merge(inputProject);
+        Student student = this.em.merge(inputStudent);
+        
         if (project.getStatus() != ProjectStatus.AVAILABLE) {
             throw new IllegalStateException();
         }
         student.setProject(project);
         project.setStatus(ProjectStatus.PROPOSED);
         
-        this.log.create(new Event(EventType.PROJECT_SELECTED, true) {{
-            setTargetUser(project.getCreator());
-            setProject(project);
-        }});
+        Event event = new Event(EventType.PROJECT_SELECTED, true);
+        event.setTargetUser(project.getCreator());
+        event.setProject(project);
+        this.log.create(event);
         
         this.em.flush();
     }

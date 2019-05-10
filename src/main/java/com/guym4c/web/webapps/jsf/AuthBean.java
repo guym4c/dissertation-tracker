@@ -62,7 +62,7 @@ public class AuthBean implements Serializable {
         } catch (ServletException e) {
             //TODO handle failed logout
         }
-        
+        request.getSession().invalidate();
         
         context.redirect("/login");
     }

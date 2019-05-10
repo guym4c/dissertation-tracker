@@ -1,14 +1,19 @@
 package com.guym4c.web.webapps.jsf;
 
 import com.guym4c.web.webapps.ejb.StartupEJB;
+import com.guym4c.web.webapps.ejb.StudentEJB;
 import com.guym4c.web.webapps.entity.AppUser;
 import com.guym4c.web.webapps.entity.AppUserGroup;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 @Named
 @RequestScoped
 public class UserUtilBean extends AbstractBean {
+    
+    @EJB
+    private StudentEJB studentBean;
     
     public String userHome() {
         
@@ -17,7 +22,7 @@ public class UserUtilBean extends AbstractBean {
         } else if (this.session.getUser().isSupervisor()) {
             return "/supervisor/" + this.session.getUser().getSussexId();
         } else {
-            return "/home/student";
+            return "/projects";
         }
     }
     
@@ -41,6 +46,24 @@ public class UserUtilBean extends AbstractBean {
     
     public String defaultAdminUsername() {
         return StartupEJB.DEFAULT_ADMIN_USERNAME;
+    }
+    
+    public boolean hasProject() {
+        if (!this.session.loggedIn()) {
+            return false;
+        }
+        return this.studentBean.get(
+                this.session.getUser().getSussexId())
+                .getProject() != null;
+    }
+    
+    public boolean projectNotSelected() {
+        if (!this.session.loggedIn()) {
+            return true;
+        }
+        return this.studentBean.get(
+                this.session.getUser().getSussexId())
+                .getProject() == null;
     }
     
 }

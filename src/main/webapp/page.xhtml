@@ -13,7 +13,7 @@
         
         <b:navBar brand="FliYP" brandHref="#{userUtilBean.userHome()}" fluid="true">
             <b:navbarLinks>
-                <ui:fragment rendered="#{authBean.loggedIn()}">
+                <ui:fragment rendered="#{authBean.loggedIn() and viewProjectsBean.projectNotSelected()}">
                     <b:navLink value="Propose project"
                            href="/projects/new"
                            iconAwesome="plus"/>
