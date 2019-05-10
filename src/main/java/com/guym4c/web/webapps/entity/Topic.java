@@ -6,7 +6,10 @@ import javax.persistence.*;
 @NamedQueries({
     
     @NamedQuery(name = "Topic.byTitle",
-            query = "SELECT t FROM Topic t WHERE t.title = :title")
+            query = "SELECT t FROM Topic t WHERE t.title = :title"),
+    
+    @NamedQuery(name = "Topic.all",
+            query = "SELECT t FROM Topic t")
 })
 
 @Entity

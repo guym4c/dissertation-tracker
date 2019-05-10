@@ -13,6 +13,12 @@
         
         <b:navBar brand="FliYP" brandHref="#{userUtilBean.userHome()}" fluid="true">
             <b:navbarLinks>
+                <ui:fragment rendered="#{authBean.loggedIn()}">
+                    <b:navLink value="Propose project"
+                           href="/projects/new"
+                           iconAwesome="plus"/>
+                </ui:fragment>
+                
                 <ui:fragment rendered="#{authBean.user.isSupervisor()}">
                     <b:navLink value="New topic" 
                                href="/projects/topics/new"

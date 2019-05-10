@@ -38,6 +38,10 @@
             <pattern value="/projects/topics/new" />
             <view-id value="/faces/project/newTopic.xhtml" />
     </url-mapping>
+    <url-mapping id="new-project">
+            <pattern value="/projects/new" />
+            <view-id value="/faces/project/new.xhtml" />
+    </url-mapping>
     
     <url-mapping id="events">
             <pattern value="/events" />

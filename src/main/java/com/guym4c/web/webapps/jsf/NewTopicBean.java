@@ -7,13 +7,14 @@ package com.guym4c.web.webapps.jsf;
 
 import com.guym4c.web.webapps.ejb.TopicEJB;
 import com.guym4c.web.webapps.entity.Topic;
+import java.io.IOException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class NewTopicBean {
+public class NewTopicBean extends AbstractBean {
     
     @EJB
     private TopicEJB topicBean;
@@ -22,8 +23,13 @@ public class NewTopicBean {
     
     private String description;
     
-    public void create() {
+    public void create() throws IOException {
         topicBean.create(new Topic(this.title, this.description));
+        this.context.redirect("/projects/topics/new?created=true");
+    }
+    
+    public boolean created() {
+        return this.request.getParameter("created") != null;
     }
 
     public String getTitle() {

@@ -23,9 +23,11 @@ public class Project extends AbstractEntity {
     @JoinColumn(nullable = false)
     private Supervisor supervisor;
     
+    public static final int TITLE_LENGTH = 199;
     @Column(length = 199, nullable = false)
     private String title;
     
+    public static final int DESCRIPTION_LENGTH = 999;
     @Column(length = 999, nullable = false)
     private String description;
     
@@ -51,9 +53,9 @@ public class Project extends AbstractEntity {
         super();
     }
 
-    public Project(Supervisor supervisor, String title, String description, ProjectStatus status) {
+    public Project(String title, String description, ProjectStatus status) {
         this();
-        this.supervisor = supervisor;
+        this.creator = creator;
         this.title = title;
         this.description = description;
         this.status = status;

@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Log In</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template = "../page.xhtml">
+
+            <ui:define name = "container">
+                
+                <ui:fragment rendered="#{newProjectBean.created()}">
+                    <b:alert severity="success">
+                        <h:outputText value="New project created"/>
+                    </b:alert>
+                </ui:fragment>
+
+                <h2>Propose a project</h2>
+
+                <h:form>
+
+                    <b:inputText label="Title"
+                                 required="true"
+                                 value="#{newProjectBean.title}"
+                                 required-message="You must provide a title">
+                        <f:validator binding="#{projectTitleValidator}"/>
+                    </b:inputText>
+                    <b:message for="@previous"/>
+                    
+                    <b:inputText label="Description"
+                                 required="true"
+                                 value="#{newProjectBean.description}"
+                                 required-message="You must provide a description">
+                        <f:validator binding="#{projectDescriptionValidator}"/>
+                    </b:inputText>
+                    <b:message for="@previous"/>
+                    
+                    <div>
+                        <b:selectMultiMenu label="Topics" value="#{newProjectBean.inputTopics}">
+                            <f:selectItems value="#{newProjectBean.topics}" 
+                                           var="topic" 
+                                           itemValue="#{topic.id}" 
+                                           itemLabel="#{topic.title}"/>
+                        </b:selectMultiMenu>
+                    </div>
+                    
+                    <b:navLink/>
+                    
+                    <b:inputText label="Skills"
+                                 value="#{newProjectBean.skills}"/>
+                    <b:message for="@previous"/>
+                    
+                    <ui:fragment rendered="#{authBean.user.isStudent()}">
+                        <b:selectOneMenu label="Supervisor"
+                                         value="#{newProjectBean.supervisorId}"
+                                         required="true"
+                                         required-message="You must select a supervisor to propose the project to">
+                            <f:selectItems value="#{newProjectBean.supervisors}" 
+                                           var="supervisor" 
+                                           itemValue="#{supervisor.appUser.sussexId}"
+                                           itemLabel="#{supervisor.appUser.name} #{supervisor.appUser.surname}"/>
+                        </b:selectOneMenu>
+                                         
+                    </ui:fragment>
+                    
+
+                    <b:commandButton value="Propose" 
+                                     look="primary" 
+                                     action="#{newProjectBean.create()}"/>
+                    <b:commandButton value="Reset" type="reset"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

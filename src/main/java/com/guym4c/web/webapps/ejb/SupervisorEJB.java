@@ -4,7 +4,6 @@ import com.guym4c.web.webapps.entity.Supervisor;
 import java.util.List;
 import javax.annotation.security.DeclareRoles;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
@@ -14,7 +13,7 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 public class SupervisorEJB extends AbstractUserEJB {
     
     @TransactionAttribute(NOT_SUPPORTED)
-    @RolesAllowed({"administrator"})
+    @PermitAll
     public List<Supervisor> getAll() {
         return this.em.createNamedQuery("Supervisor.all")
                 .getResultList();
