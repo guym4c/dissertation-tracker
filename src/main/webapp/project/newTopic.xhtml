@@ -13,6 +13,13 @@
         <ui:composition template = "../page.xhtml">
             
             <ui:define name = "container">
+                
+                <ui:fragment rendered="#{newStudentBean.created()}">
+                    <b:alert severity="success">
+                        <h:outputText value="New topic created"/>
+                    </b:alert>
+                </ui:fragment>
+                
                 <h2>New topic</h2>
                 <h:form>
                     <b:inputText placeholder="Title" 
