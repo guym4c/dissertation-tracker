@@ -55,10 +55,16 @@ public class Project extends AbstractEntity {
 
     public Project(String title, String description, ProjectStatus status) {
         this();
-        this.creator = creator;
         this.title = title;
         this.description = description;
         this.status = status;
+    }
+    
+    @PreRemove
+    public void cascadeDelete() {
+        for (Event event : this.events) {
+            event.setProject(null);
+        }
     }
     
     public Supervisor getSupervisor() {

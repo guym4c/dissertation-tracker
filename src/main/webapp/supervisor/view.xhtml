@@ -33,7 +33,9 @@
                             <b:dataTableColumn label="Student">
                                 <h:outputText value="#{project.student.appUser.name} #{project.student.appUser.surname} "/>
                                 <ui:fragment rendered="#{project.student != null and userUtilBean.isAdmin()}">
-                                    <b:commandButton look="link" value="Unselect"/>
+                                    <b:commandButton look="link" 
+                                                     value="Unselect"
+                                                     action="#{viewSupervisorBean.unselect(project)}"/>
                                 </ui:fragment>
                             </b:dataTableColumn>
                             <b:dataTableColumn value="#{project.creator.name} #{project.creator.surname}"
@@ -55,11 +57,17 @@
                                         <h:form>
                                             <b:buttonGroup>
                                                 <ui:fragment rendered="#{event.project.status == 'PROPOSED'}">
-                                                    <b:commandButton value="Accept" icon-awesome="check"/>
-                                                    <b:commandButton value="Reject" icon-awesome="times"/>
+                                                    <b:commandButton value="Accept" 
+                                                                     icon-awesome="check"
+                                                                     action="#{viewSupervisorBean.accept(event.project)}"/>
+                                                    <b:commandButton value="Reject" 
+                                                                     icon-awesome="times"
+                                                                     action="#{viewSupervisorBean.reject(event.project)}"/>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{event.project.status == 'ACCEPTED'}">
-                                                    <b:commandButton value="Accepted" icon-awesome="check" disabled="true"/>
+                                                    <b:commandButton value="Accepted" 
+                                                                     icon-awesome="check" 
+                                                                     disabled="true"/>
                                                 </ui:fragment>
                                                 <ui:fragment rendered="#{event.project.status == 'AVAILABLE'}">
                                                     <b:commandButton value="Rejected" icon-awesome="times" disabled="true"/>

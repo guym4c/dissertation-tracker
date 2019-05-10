@@ -67,29 +67,35 @@ public class ProjectEJB extends AbstractEntityEJB {
     
     @RolesAllowed({"supervisor"})
     @TransactionAttribute(REQUIRED)
-    public void accept(final Project project) {
+    public void accept(Project inputProject) {
+        
+        Project project = this.em.merge(inputProject);
+        
         project.setStatus(ProjectStatus.ACCEPTED);
         
-        this.log.create(new Event(EventType.PROJECT_ACCEPTED) {{
-            setProject(project);
-        }});
+        Event event = new Event(EventType.PROJECT_ACCEPTED);
+        event.setProject(project);
+        this.log.create(event);
         
         this.em.flush();
     }
     
     @RolesAllowed({"supervisor", "administrator"})
     @TransactionAttribute(REQUIRED)
-    public void reject(final Project project) {
+    public void reject(Project inputProject) {
+        
+        Project project = this.em.merge(inputProject);
+        
         project.setStatus(ProjectStatus.AVAILABLE);
         
         if (project.getStudent() != null) {
             project.getStudent().setProject(null);
         }
         
-        this.log.create(new Event(EventType.PROJECT_REJECTED) {{
-            setProject(project);
-            setTargetUser(project.getCreator());
-        }});
+        Event event = new Event(EventType.PROJECT_REJECTED);
+        event.setProject(project);
+        event.setTargetUser(project.getCreator());
+        this.log.create(event);
         
         if (project.getCreator().isStudent()) {
             this.em.remove(project);
