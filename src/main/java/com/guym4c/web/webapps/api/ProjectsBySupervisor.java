@@ -28,6 +28,6 @@ public class ProjectsBySupervisor extends ApiResolver {
         for (Project project : projects) {
             results.add(new ProjectOutputType(project));
         }
-        return Response.ok(results).build();
+        return this.createResponse(results);
     }
 }

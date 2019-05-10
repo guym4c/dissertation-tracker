@@ -17,14 +17,14 @@ import javax.inject.Named;
 public class NewTopicBean extends AbstractBean {
     
     @EJB
-    private TopicEJB topicBean;
+    private TopicEJB topicEJB;
     
     private String title;
     
     private String description;
     
     public void create() throws IOException {
-        topicBean.create(new Topic(this.title, this.description));
+        topicEJB.create(new Topic(this.title, this.description));
         this.context.redirect("/projects/topics/new?created=true");
     }
     

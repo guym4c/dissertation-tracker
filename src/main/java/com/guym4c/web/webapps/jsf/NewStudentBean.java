@@ -7,7 +7,6 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityExistsException;
 
@@ -16,12 +15,12 @@ import javax.persistence.EntityExistsException;
 public class NewStudentBean extends NewUserBean {
     
     @EJB
-    private StudentEJB studentBean;
+    private StudentEJB studentEJB;
     
     private String course;
     
     public void create() throws EntityExistsException, UnsupportedEncodingException, UnsupportedEncodingException, NoSuchAlgorithmException, IOException {
-        this.studentBean.create(new Student(
+        this.studentEJB.create(new Student(
             this.constructUser(),
             this.course));
         this.context.redirect("/students/new?created=true");

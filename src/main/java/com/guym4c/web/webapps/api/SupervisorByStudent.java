@@ -28,6 +28,6 @@ public class SupervisorByStudent extends ApiResolver {
         for (Supervisor supervisor : supervisors) {
             results.add(new SupervisorOutputType(supervisor));
         }
-        return Response.ok(results).build();
+        return this.createResponse(results);
     }
 }

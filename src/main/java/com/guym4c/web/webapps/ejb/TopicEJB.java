@@ -17,6 +17,10 @@ import javax.persistence.EntityExistsException;
 @DeclareRoles({"administrator", "supervisor"})
 public class TopicEJB extends AbstractEntityEJB {
 
+    /**
+     * @param topic
+     * @return True if entity $topic already exists. Checks for a unique $topic.title
+     */
     @TransactionAttribute(NOT_SUPPORTED)
     private boolean exists(Topic topic) {
         return !this.em.createNamedQuery("Topic.byTitle", Topic.class)
@@ -25,6 +29,12 @@ public class TopicEJB extends AbstractEntityEJB {
                 .isEmpty();
     }
     
+    /**
+     * Persists a new Topic $topic and logs its creation
+     * 
+     * @param topic
+     * @throws EntityExistsException 
+     */
     @TransactionAttribute(REQUIRED)
     public void create(final Topic topic) throws EntityExistsException {
         if (this.exists(topic)) {
@@ -40,11 +50,18 @@ public class TopicEJB extends AbstractEntityEJB {
         this.em.flush();
     }
     
+    /**
+     * @param title
+     * @return Whether a topic with title $title exists. Wraps the Topic exists method above.
+     */
     @RolesAllowed({"supervisor"})
     public boolean exists (String title) {
         return this.exists(new Topic(title, ""));
     }
     
+    /**
+     * @return A list of all Topics
+     */
     @TransactionAttribute(NOT_SUPPORTED)
     @PermitAll
     public List<Topic> getAll() {

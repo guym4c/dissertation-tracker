@@ -13,13 +13,13 @@ import javax.inject.Named;
 public class ViewAllSupervisorsBean extends AbstractBean {
     
     @EJB
-    private SupervisorEJB supervisorBean;
+    private SupervisorEJB supervisorEJB;
     
     private List<Supervisor> supervisors;
     
     @PostConstruct
     public void initialise() {
-        this.supervisors = this.supervisorBean.getAll();
+        this.supervisors = this.supervisorEJB.getAll();
     }
 
     public List<Supervisor> getSupervisors() {

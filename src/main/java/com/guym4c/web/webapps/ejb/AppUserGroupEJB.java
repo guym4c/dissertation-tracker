@@ -10,6 +10,11 @@ import static javax.ejb.TransactionAttributeType.REQUIRED;
 @PermitAll
 public class AppUserGroupEJB extends AbstractEntityEJB {
     
+    /**
+     * Persists group $group
+     * 
+     * @param group 
+     */
     @TransactionAttribute(REQUIRED)
     public void create(AppUserGroup group) {
         this.persist(group).flush();

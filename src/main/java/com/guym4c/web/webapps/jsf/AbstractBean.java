@@ -5,6 +5,9 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Bean superclass providing utilities such as request context and logged in user to its children.
+ */
 public abstract class AbstractBean {
     
     protected final ExternalContext context;

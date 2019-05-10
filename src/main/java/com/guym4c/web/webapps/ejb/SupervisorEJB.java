@@ -12,6 +12,9 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @DeclareRoles({"student", "supervisor", "administrator"})
 public class SupervisorEJB extends AbstractUserEJB {
     
+    /**
+     * @return A list of all supervisors
+     */
     @TransactionAttribute(NOT_SUPPORTED)
     @PermitAll
     public List<Supervisor> getAll() {
@@ -19,6 +22,10 @@ public class SupervisorEJB extends AbstractUserEJB {
                 .getResultList();
     }
     
+    /**
+     * @param sussexId
+     * @return The supervisor associated with the AppUser with Sussex ID $sussexID
+     */
     @PermitAll
     public Supervisor get(String sussexId) {
         return this.em.createNamedQuery("Supervisor.get", Supervisor.class)

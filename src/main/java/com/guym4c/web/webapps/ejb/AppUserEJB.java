@@ -15,8 +15,12 @@ import static javax.ejb.TransactionAttributeType.NOT_SUPPORTED;
 @DeclareRoles({"administrator"})
 public class AppUserEJB extends AbstractUserEJB {
     
+    /**
+     * @param user The user to mark as an administrator
+     * @param log Whether to log the action (useful if called from a context where the logger is not avaliable)
+     */
     @TransactionAttribute(REQUIRED)
-    public void markAsAdministrator(final AppUser user, boolean log) {
+    public void markAsAdministrator(AppUser user, boolean log) {
         this.addToGroup(AppUserGroup.ADMINISTRATOR, user);
         
         if (log) {
@@ -28,10 +32,20 @@ public class AppUserEJB extends AbstractUserEJB {
         this.em.flush();
     }
     
+    /**
+     * Overloads markAsAdministrator(AppUser, boolean) to force logging
+     * 
+     * @param user THe user to mark as an administrator
+     */
+    @TransactionAttribute(REQUIRED)
     public void markAsAdministrator(AppUser user) {
         this.markAsAdministrator(user, true);
     }
     
+    /**
+     * @param group
+     * @return A list of AppUsers in group $group.
+     */
     @TransactionAttribute(NOT_SUPPORTED)
     public List<AppUser> getAll(String group) {
         return this.em.createNamedQuery("AppUser.byGroup", AppUser.class)

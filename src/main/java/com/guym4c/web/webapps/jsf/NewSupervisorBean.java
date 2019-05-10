@@ -15,14 +15,14 @@ import javax.persistence.EntityExistsException;
 public class NewSupervisorBean extends NewUserBean {
     
     @EJB
-    private SupervisorEJB supervisorBean;
+    private SupervisorEJB supervisorEJB;
     
     private String department;
     
     private String telephoneNumber;
     
     public void create() throws EntityExistsException, UnsupportedEncodingException, UnsupportedEncodingException, NoSuchAlgorithmException, IOException {
-        this.supervisorBean.create(new Supervisor(
+        this.supervisorEJB.create(new Supervisor(
             this.constructUser(),
             this.department,
             this.telephoneNumber));

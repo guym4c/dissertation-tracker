@@ -15,6 +15,9 @@ import static javax.ejb.TransactionAttributeType.REQUIRED;
 @DeclareRoles({"administrator", "supervisor", "student"})
 public class EventEJB extends AbstractEntityEJB {
     
+    /**
+     * @param event The event to persist. The logged-in user will be set as the acting user.
+     */
     @PermitAll
     @TransactionAttribute(REQUIRED)
     public void create(Event event) {
@@ -22,6 +25,10 @@ public class EventEJB extends AbstractEntityEJB {
         this.persist(event).flush();
     }
     
+    /**
+     * @param user
+     * @return All events acting upon user $user
+     */
     @RolesAllowed({"administrator"})
     @TransactionAttribute(NOT_SUPPORTED)
     public List<Event> getAll(AbstractUserType user) {
@@ -30,6 +37,9 @@ public class EventEJB extends AbstractEntityEJB {
                 .getResultList();
     }
     
+    /**
+     * @return A list of all events
+     */
     public List<Event> getAll() {
         return this.em.createNamedQuery("Event.all", Event.class)
                 .getResultList();

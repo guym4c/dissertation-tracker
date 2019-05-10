@@ -16,18 +16,18 @@ public class ViewStudentsBean extends AbstractBean {
     private List<Student> students;
     
     @EJB
-    private StudentEJB studentBean;
+    private StudentEJB studentEJB;
     
     @EJB
-    private AppUserEJB appUserBean;
+    private AppUserEJB appUserEJB;
     
     @PostConstruct
     public void initialise() {
-        this.students = studentBean.getAll();
+        this.students = studentEJB.getAll();
     }
     
     public void markAsAdministrator(Student student) {
-        appUserBean.markAsAdministrator(student.getAppUser());
+        appUserEJB.markAsAdministrator(student.getAppUser());
     }
 
     public List<Student> getStudents() {

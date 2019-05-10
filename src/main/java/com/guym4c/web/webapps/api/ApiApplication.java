@@ -8,6 +8,10 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/api")
 public class ApiApplication extends Application {
 
+    /**
+     * Register API resource classes
+     * @return A set of resource request handlers
+     */
     @Override
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> classes = new HashSet<Class<?>>() {{

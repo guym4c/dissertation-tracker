@@ -14,25 +14,33 @@ import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.REQUIRED;
 import javax.persistence.EntityExistsException;
 
+/**
+ * Ensures at least one administrator is present upon deploy.
+ */
 @Startup
 @Singleton
 @RunAs("administrator")
 public class StartupEJB {
     
+    // default credentials
     public static final String DEFAULT_ADMIN_USERNAME = "admin1";
     private static final String DEFAULT_ADMIN_PASSWORD = "admin1";
     
     @EJB
-    private SupervisorEJB supervisorBean;
+    private SupervisorEJB supervisorEJB;
     
     @EJB
-    private AppUserEJB appUserBean;
+    private AppUserEJB appUserEJB;
     
+    /**
+     * Set up default admin
+     */
     @PostConstruct
     @TransactionAttribute(REQUIRED)
     public void initialise() {
         
-        if (appUserBean.getAll(AppUserGroup.ADMINISTRATOR).isEmpty()) {
+        // check if other admins are already persisted
+        if (appUserEJB.getAll(AppUserGroup.ADMINISTRATOR).isEmpty()) {
             
             Supervisor admin =  new Supervisor(
                 new AppUser(DEFAULT_ADMIN_USERNAME, "Admin", "Admin", "admin@admin", DEFAULT_ADMIN_PASSWORD),
@@ -40,11 +48,11 @@ public class StartupEJB {
                 "admin");
             
             try {
-                this.supervisorBean.create(admin);
+                this.supervisorEJB.create(admin);
             } catch (EntityExistsException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
                 // deploy setup failed
             }
-            this.appUserBean.markAsAdministrator(admin.getAppUser(), false);
+            this.appUserEJB.markAsAdministrator(admin.getAppUser(), false);
         }
     }
 }

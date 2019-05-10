@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Entity(name = "AppUserGroup")
 public class AppUserGroup extends AbstractEntity {
     
+    // Group types
     public static String ADMINISTRATOR = "administrator";
     public static String SUPERVISOR = "supervisor";
     public static String STUDENT = "student";

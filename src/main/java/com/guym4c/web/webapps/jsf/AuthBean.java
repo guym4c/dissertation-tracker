@@ -28,10 +28,10 @@ public class AuthBean implements Serializable {
     private String password;
     
     @EJB
-    private AppUserEJB appUserBean;
+    private AppUserEJB appUserEJB;
     
     @EJB
-    private EventEJB eventBean;
+    private EventEJB eventEJB;
     
     public void login() throws IOException {
         ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
@@ -42,10 +42,13 @@ public class AuthBean implements Serializable {
             //TODO handle failed login
         }
         
-        this.user = appUserBean.get(this.userId, AppUser.class);
+        // store who is logged in
+        this.user = appUserEJB.get(this.userId, AppUser.class);
         
-        eventBean.create(new Event(EventType.LOGIN));
+        // log
+        eventEJB.create(new Event(EventType.LOGIN));
         
+        // redirect appropriately
         if (this.user.isStudent()) {
             context.redirect("/projects");
         } else {
@@ -58,6 +61,8 @@ public class AuthBean implements Serializable {
         HttpServletRequest request = (HttpServletRequest) context.getRequest();
         try {
             request.logout();
+            
+            // purge user in this class
             this.user = null;
         } catch (ServletException e) {
             //TODO handle failed logout

@@ -17,8 +17,12 @@ import javax.xml.bind.DatatypeConverter;
 public abstract class AbstractUserEJB extends AbstractEntityEJB {
     
     @EJB
-    private AppUserGroupEJB appUserGroupBean;
+    private AppUserGroupEJB appUserGroupEJB;
     
+    /**
+     * @param user
+     * @return Whether AppUser $user exists
+     */
     @TransactionAttribute(NOT_SUPPORTED)
     private boolean exists(AppUser user) {
         return !this.em.createNamedQuery("AppUser.find", AppUser.class)
@@ -27,6 +31,14 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
                 .isEmpty();
         }
         
+    /**
+     * Persist $user and create the relevant permission group memberships
+     * 
+     * @param user
+     * @throws EntityExistsException
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException 
+     */
     @TransactionAttribute(REQUIRED)
     public void create(AbstractUserType user) throws EntityExistsException, 
             UnsupportedEncodingException, 
@@ -50,8 +62,14 @@ public abstract class AbstractUserEJB extends AbstractEntityEJB {
         }
     }
     
+    /**
+     * Add user $user to group $group.
+     * 
+     * @param group
+     * @param user 
+     */
     @TransactionAttribute(REQUIRED)
     protected void addToGroup(String group, AppUser user) {
-        appUserGroupBean.create(new AppUserGroup(group, user));
+        appUserGroupEJB.create(new AppUserGroup(group, user));
     }
 }

@@ -9,6 +9,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+/**
+ * Entity superclass, containing utilities used by all EJBs
+ * (entity manager, DB logger, session bean)
+ */
 public abstract class AbstractEntityEJB {
     
     @PersistenceContext
@@ -20,11 +24,24 @@ public abstract class AbstractEntityEJB {
     @Inject
     protected AuthBean session;
     
+    /**
+     * 
+     * @param <T>
+     * @param id
+     * @param type
+     * @return Row $id from table $type.
+     */
     @TransactionAttribute(NOT_SUPPORTED)
     public <T> T get(String id, Class<T> type) {
         return this.em.find(type, id);
     }
     
+    /**
+     * A bit of sugar to wrap EntityManager::persist in a chainable function.
+     * 
+     * @param object
+     * @return The JPA entity manager
+     */
     @TransactionAttribute(REQUIRED)
     protected EntityManager persist(Object object) {
         this.em.persist(object);

@@ -3,6 +3,9 @@ package com.guym4c.web.webapps.api;
 import com.guym4c.web.webapps.entity.AbstractUserType;
 import com.guym4c.web.webapps.entity.AppUser;
 
+/**
+ * Output user type superclass
+ */
 public abstract class AbstractUserOutputType {
     
     private final String id;

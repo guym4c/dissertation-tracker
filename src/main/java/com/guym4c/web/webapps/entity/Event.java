@@ -37,6 +37,7 @@ public class Event extends AbstractEntity {
     @Column(nullable = false)
     private boolean notification = false;
     
+    // Utility field, when we want to associate the event with something that there isn't an existing relation with
     private String eventData;
 
     public Event() {

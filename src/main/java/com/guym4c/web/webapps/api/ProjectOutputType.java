@@ -5,6 +5,10 @@ import com.guym4c.web.webapps.entity.Topic;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A Project without its relations, for output.
+ * Avoids circular references caused by bidirectional JPA relations.
+ */
 public class ProjectOutputType {
     
     private final String id;

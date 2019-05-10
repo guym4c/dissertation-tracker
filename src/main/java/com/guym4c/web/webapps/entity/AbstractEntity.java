@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.UUID;
 import javax.persistence.*;
 
+/**
+ * Superclass for entities identified with a UUID.
+ */
 @MappedSuperclass
 public abstract class AbstractEntity implements Serializable {
 	
@@ -21,6 +24,11 @@ public abstract class AbstractEntity implements Serializable {
         return id.hashCode();
     }
 
+    /**
+     * 
+     * @param obj
+     * @return $obj compared to this by type then ID
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

@@ -13,13 +13,13 @@ import javax.inject.Named;
 public class EventsBean extends AbstractBean {
     
     @EJB
-    private EventEJB eventBean;
+    private EventEJB eventEJB;
     
     private List<Event> events;
     
     @PostConstruct
     public void initialise() {
-        this.events = this.eventBean.getAll();
+        this.events = this.eventEJB.getAll();
     }
 
     public List<Event> getEvents() {

@@ -15,21 +15,21 @@ import javax.inject.Named;
 public class ViewProjectsBean extends AbstractBean {
     
     @EJB
-    private ProjectEJB projectBean;
+    private ProjectEJB projectEJB;
     
     @EJB
-    private StudentEJB studentBean;
+    private StudentEJB studentEJB;
     
     private List<Project> projects;
     
     @PostConstruct
     public void initialise() {
-        this.projects = projectBean.getAllUnassigned();
+        this.projects = projectEJB.getAllUnassigned();
     }
     
     public void select(Project project) throws IOException {
-        this.projectBean.select(
-                this.studentBean.get(this.session.getUser().getSussexId()), project);
+        this.projectEJB.select(
+                this.studentEJB.get(this.session.getUser().getSussexId()), project);
         this.context.redirect("/projects");
     }
 

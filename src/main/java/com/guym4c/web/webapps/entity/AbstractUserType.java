@@ -2,6 +2,9 @@ package com.guym4c.web.webapps.entity;
 
 import javax.persistence.*;
 
+/**
+ * Superclass for entities associated with an AppUser (student, supervisor)
+ */
 @MappedSuperclass
 public abstract class AbstractUserType extends AbstractEntity {
     

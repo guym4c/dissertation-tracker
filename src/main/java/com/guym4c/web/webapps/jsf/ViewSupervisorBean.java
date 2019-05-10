@@ -19,20 +19,20 @@ public class ViewSupervisorBean extends AbstractBean {
     private Supervisor supervisor;
     
     @EJB
-    private SupervisorEJB supervisorBean;
+    private SupervisorEJB supervisorEJB;
     
     @EJB
-    private AppUserEJB appUserBean;
+    private AppUserEJB appUserEJB;
     
     @EJB
-    private ProjectEJB projectBean;
+    private ProjectEJB projectEJB;
     
     @Inject
     private UserUtilBean userUtilBean;
     
     @PostConstruct
     public void initialise() {
-        this.supervisor = supervisorBean.get(this.request.getParameter("sussexId"));
+        this.supervisor = supervisorEJB.get(this.request.getParameter("sussexId"));
     }
 
     public Supervisor getSupervisor() {
@@ -44,7 +44,7 @@ public class ViewSupervisorBean extends AbstractBean {
     }
     
     public void markAsAdministrator() {
-        appUserBean.markAsAdministrator(supervisor.getAppUser());
+        appUserEJB.markAsAdministrator(supervisor.getAppUser());
     }
     
     public void unselect(Project project) throws IOException {
@@ -52,12 +52,12 @@ public class ViewSupervisorBean extends AbstractBean {
     }
     
     public void accept(Project project) throws IOException {
-        projectBean.accept(project);
+        projectEJB.accept(project);
         this.context.redirect(this.userUtilBean.userHome());
     }
     
     public void reject(Project project) throws IOException {
-        projectBean.reject(project);
+        projectEJB.reject(project);
         this.context.redirect(this.userUtilBean.userHome());
     }
 }
