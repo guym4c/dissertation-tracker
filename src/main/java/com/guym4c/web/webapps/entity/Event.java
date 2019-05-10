@@ -6,7 +6,10 @@ import javax.persistence.*;
 @NamedQueries({
     
     @NamedQuery(name = "Event.byUser",
-            query = "SELECT e FROM Event e WHERE e.actingUser.sussexId = :userId")
+            query = "SELECT e FROM Event e WHERE e.actingUser.sussexId = :userId"),
+    
+    @NamedQuery(name = "Event.all",
+            query = "SELECT e FROM Event e")
 })
 
 @Entity

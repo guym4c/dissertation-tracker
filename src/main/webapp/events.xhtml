@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Log In</title>
+    </h:head>
+    <h:body>
+        
+        <ui:composition template = "page.xhtml">
+            
+            <ui:define name = "container">
+
+                    <h2>Transaction log</h2>
+                    <h:form>
+                        <b:dataTable value="#{eventsBean.events}" var="event">
+                            <b:dataTableColumn label="Time"
+                                               value="#{event.occurred}"/>
+                            <b:dataTableColumn label="Type"
+                                               value="#{event.type}"/>
+                            <b:dataTableColumn label="Created by"
+                                               value="#{event.actingUser.name} #{event.actingUser.surname}"/>
+                            
+                            <b:dataTableColumn label="Acting upon">
+                                <ui:fragment rendered="#{event.targetUser != null}">
+                                    <h:outputText value="#{event.targetUser.name} #{event.targetUser.surname}"/>
+                                    <ui:fragment rendered="#{event.notification}">
+                                        <h:outputText value=" (notified)"/>
+                                    </ui:fragment>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{event.targetUser == null}">
+                                    <h:outputText value="(no user attached)"/>
+                                </ui:fragment>
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="Project">
+                                <ui:fragment rendered="#{event.project != null}">
+                                    <h:outputText value="#{event.project.title}"/>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{event.project == null}">
+                                    <h:outputText value="(no project attached)"/>
+                                </ui:fragment>
+                            </b:dataTableColumn>
+                            <b:dataTableColumn label="Other data">
+                                <ui:fragment rendered="#{event.eventData != null}">
+                                    <h:outputText value="#{event.eventData}"/>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{event.eventData == null}">
+                                    <h:outputText value="(no additional data included)"/>
+                                </ui:fragment>
+                            </b:dataTableColumn>
+                        </b:dataTable>
+                    </h:form>
+                    
+            </ui:define>
+            
+        </ui:composition>
+        
+    </h:body>
+</html>

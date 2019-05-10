@@ -13,11 +13,18 @@
         
         <b:navBar brand="FliYP" brandHref="#{userUtilBean.userHome()}" fluid="true">
             <b:navbarLinks>
-                <b:navLink value="Link" href="#"></b:navLink>
+                <ui:fragment rendered="#{authBean.user.isSupervisor()}">
+                    <b:navLink value="New topic" 
+                               href="/projects/topics/new"
+                               iconAwesome="plus"/>
+                </ui:fragment>
+                
             </b:navbarLinks>
             <b:navbarLinks pull="right">
                 <ui:fragment rendered="#{userUtilBean.isAdmin()}">
                     <b:dropMenu value="Admin actions" iconAwesome="wrench">
+                        <b:navLink value="Log" iconAwesome="list-ul"/>
+                        <b:navLink/>
                         <b:navLink header="Supervisors"/>
                         <b:navLink value="New" href="/supervisors/new" iconAwesome="plus"/>
                         <b:navLink value="View all" href="/supervisors" iconAwesome="users"/>

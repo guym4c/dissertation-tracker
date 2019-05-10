@@ -24,9 +24,14 @@ public class EventEJB extends AbstractEntityEJB {
     
     @RolesAllowed({"administrator"})
     @TransactionAttribute(NOT_SUPPORTED)
-    private List<Event> getAll(AbstractUserType user) {
+    public List<Event> getAll(AbstractUserType user) {
         return this.em.createNamedQuery("Event.byUser", Event.class)
                 .setParameter("userId", user.getAppUser().getSussexId())
+                .getResultList();
+    }
+    
+    public List<Event> getAll() {
+        return this.em.createNamedQuery("Event.all", Event.class)
                 .getResultList();
     }
 }
